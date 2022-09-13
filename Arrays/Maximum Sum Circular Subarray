@@ -1,0 +1,31 @@
+class Solution {
+    public int normal_sum(int[] arr,int n){
+          int result=arr[0];
+        int max_ending=arr[0]; 
+      
+        for(int i=1; i<n ;i++){
+            max_ending=Math.max(arr[i],max_ending+arr[i]);
+            result=Math.max(result, max_ending);
+        }
+        
+        return result;                                                            //kadane's algorithum (give maximum sum of sub-arry *normal)
+    }
+    
+    public int maxSubarraySumCircular(int[] nums) {
+        
+        int max_normal=normal_sum( nums, nums.length);
+        if(max_normal<0) return max_normal;  
+        
+        int sum=0;
+        for(int i=0 ;i<nums.length;i++)
+        { sum+=nums[i];                                                              // take total sum of array
+           nums[i]= -nums[i];                                                        //inverse  all element (+) ---> (-) and   
+        }
+        
+       int max_circular=sum+normal_sum( nums, nums.length); 
+                                                                                     // her esubtract inverted sum from totalsum (-) (-) --> (+)  so,we add total sum and invertid array maxsum
+        
+        return Math.max(max_circular,max_normal);
+        
+    }
+}
