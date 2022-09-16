@@ -1,0 +1,23 @@
+class Solution {                         //using bineary search   if mid*mid<=x
+                                                                            // then there will be chance to get rood tc-->(log(n))
+    public int mySqrt(int x) {
+       
+          if(x==0) return 0;
+           long low=1,high=Integer.MAX_VALUE , result=1;
+           
+        while(low<=high)
+        {
+            long mid=low+(high-low)/2;
+            
+           
+            if(mid*mid <= x) 
+            {  low=mid+1; 
+               result=mid; 
+             }  
+            else
+            { high=mid-1;
+            }
+        }
+        return (int)result;
+    }
+}
