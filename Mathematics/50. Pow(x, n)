@@ -1,0 +1,16 @@
+class Solution {   //using bitwise // best approch   o(log(n))
+    public double myPow(double x, int n) {
+        long nn= n>0 ? n:-(long)n;
+        double result=1.0;
+     while(nn>0){
+         if((nn&1)== 1)
+         {
+             result=result*x;
+         }
+         x=x*x;
+         nn=nn>>1;
+
+        }
+        return n>=0 ? result :1/result;
+    }
+}
