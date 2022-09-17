@@ -1,0 +1,18 @@
+class Solution {
+    public int findPeakElement(int[] arr) {
+    
+        int low=0, high=arr.length-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if((mid==0||arr[mid-1]<=arr[mid]) && (mid==arr.length-1 || arr[mid+1]<=arr[mid]))
+               return mid;
+               if(arr[mid+1]>=arr[mid])  /* hint for this quection--> element which have higher value than mid if left                                              or  right we get peak at that side only*/
+                 low=mid+1;
+               else
+                 high=mid-1;
+            
+        }
+        return -1;
+    }
+}       
