@@ -1,0 +1,29 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n=nums.length;
+        int res=0,count=1;
+        for(int i=0 ; i<n ;i++)
+        { 
+          if(nums[res]==nums[i])     //MORAY'S VOTING ALGORITHUM
+                 count++;
+           else
+                 count--;    //find a candidate
+            
+            if(count==0)
+            {
+                res=i;
+                count=1;
+            }
+        }
+        count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(nums[res]==nums[i])
+                count++;              // check if candidate is actually a majority
+        }
+        if(count >= n/2)
+            return  nums[res];
+        else
+            return -1;
+    }
+}
