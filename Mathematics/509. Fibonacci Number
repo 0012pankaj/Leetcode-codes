@@ -1,0 +1,15 @@
+class Solution {
+    public int fib(int n) {
+//         if(n==0 ||n==1)
+//             return n;      // using recursion  Tc-->O(n)
+        
+//         return fib(n-1)+fib(n-2);
+        
+        // USING Binet's formula Tc-->O(1)****
+        double sqroot=Math.sqrt(5);
+ return (int)((Math.pow( 1+ sqroot,n) - Math.pow(1 - sqroot, n)) /  (double)Math.pow(2, n)/sqroot);
+        
+
+        
+    }
+}
