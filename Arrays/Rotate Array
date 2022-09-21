@@ -7,7 +7,7 @@ class Solution {
         }
          k = k% len;
         reverseArray(nums,len-k,len-1);
-         reverseArray(nums,0,len-k-1);
+         reverseArray(nums,0,len-k-1);   // using reversal Algorithum
         reverseArray(nums,0,len-1);
                
     }
