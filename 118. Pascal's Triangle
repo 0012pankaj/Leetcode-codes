@@ -1,0 +1,16 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+         List<List<Integer>> array=new ArrayList<>();
+        for(int i=0;i<numRows;i++)
+        {
+            List<Integer> sub_array=new ArrayList<>();
+            int val=1;
+            for(int j=0;j<=i;j++){
+                sub_array.add(val);
+                val=(i-j)*val/(j+1);    //using formula of permutation
+            }
+             array.add(sub_array) ;
+        }
+        return array;
+    }
+}
