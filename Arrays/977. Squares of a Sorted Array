@@ -1,0 +1,22 @@
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int s=0;
+        int n=nums.length;
+        int e=n-1;
+        int res[]=new int[n];
+        int r=n-1;
+        while(s<=e)                                       // using two pointer approch  s  e
+        {
+            if(nums[s]*nums[s] >= nums[e]*nums[e])
+            {
+                res[r]=nums[s]*nums[s];
+                s++;
+            }else{
+                 res[r]=nums[e]*nums[e];
+                e--;
+            }
+            r--;
+        }
+        return res;
+    }
+}
