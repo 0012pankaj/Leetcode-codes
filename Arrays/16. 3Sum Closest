@@ -1,0 +1,32 @@
+class Solution {                        // two pointer approch  tc..>  O(n^2)
+    public int threeSumClosest(int[] nums, int target) {
+          Arrays.sort(nums);   //sort the array
+          int min=nums[0]+nums[1]+nums[2];  //find min first three element
+         
+        for(int i=0;i<nums.length;i++)
+        {
+           
+            int start=i+1;
+            int end=nums.length-1;
+          
+            
+            while(start<end)
+            {  
+                int sum=nums[i]+nums[start]+nums[end];  //fix first element itrate others
+                
+                   if(Math.abs(target-min)>Math.abs(target-sum))
+                        min=sum;     //check deference  
+                   
+                            
+                    if(sum > target)
+                          end--;
+                    else if(sum<target)
+                         start++; 
+                    else
+                        return target;
+            }  
+            
+        }
+        return min;
+    }
+}
