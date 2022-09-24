@@ -1,0 +1,29 @@
+class Solution {
+                                                        //  TC-->O(N)  SP--->O(1)  //BEST APPROCH
+  public int firstMissingPositive(int arr[])
+    {  int n=arr.length;
+        for(int i=0;i<n;i++)           //  idea-->mother's children on their respective chair
+                                 
+        {
+            int element=arr[i];
+            if(element>=1 && element<=n)                        //consider only 1 to n
+            {
+                int chair=arr[i]-1;                         //chair no. is always (element-1)
+                if(arr[chair]!= element)             //if element is not on positon put it on
+                { 
+                    int temp=arr[chair];
+                    arr[chair]=arr[i];                //if element is not onthere respective 
+                    arr[i]=temp;                    //chair bring it by swaping
+                    i--;                             //--> point to remember i--
+                }
+            }
+        }
+        for(int i=0;i<n;i++)
+        {                                       // check if any chair is empty or if a child  is not on there respective chair
+            if(i+1 != arr[i]){ 
+                return i+1;                         //    than that child is missing
+            }
+        }
+        return n+1;
+    }
+}
