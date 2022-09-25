@@ -1,0 +1,21 @@
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int count=0;
+        HashMap<Integer,Integer> map=new HashMap<>();  // creat Hashmap
+        map.put(0,1);                                 //put sum=0 initially in map having count =1
+        int sum=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            sum+=nums[i];
+            
+            if(map.containsKey(sum-k)){     //check sum-k present
+                count+=map.get(sum-k);         // if present aad its count
+            }
+            map.put(sum,map.getOrDefault(sum,0)+1);    //add sum,count if bydefalt give 0 then it should be 1
+        }
+        return count;
+    }
+}
+
+    // TC-->O(n)         Best approch
+    //     Sp-->O(n)
