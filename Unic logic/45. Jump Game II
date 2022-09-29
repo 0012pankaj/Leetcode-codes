@@ -1,0 +1,21 @@
+class Solution {
+    public int jump(int[] nums) {
+      int jumps=0;
+        int maxjump=0;
+        int curr_pos=0;
+  for(int i=0 ;i<nums.length-1;i++)
+  {  
+     maxjump=Math.max(maxjump,nums[i]+i);
+      if(i==curr_pos)
+      {
+          curr_pos=maxjump;  //we initialise our next position with
+                             //maximum posible jump from first one
+          jumps++;
+      }
+  
+  }
+         return jumps;
+    }
+}
+
+//O(n)-->TC  O(1)-->Sp
