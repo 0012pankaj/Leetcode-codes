@@ -1,0 +1,36 @@
+class Solution {                                           //TC-->o(N)  sp-->O(N)
+    public int largestRectangleArea(int[] heights) {
+        int n=heights.length;
+        if(n==0) return 0;
+        int max_area=0;
+         int left_sh[]=new int[n];                            //CREAT ARRAY FOR STORING index of LEFT SMALLEST HEIGHT AT EACH INDEX
+        int right_sh[]=new int[n];                                  //CREAT ARRAY FOR STORING index of RIGHT SMALLEST HEIGHT AT EACH INDEX
+        left_sh[0]=-1;                                       //FOR BYDEFALT OR VERY SMALEST CONSIDER -1 FOR LEFT SIDE 
+        right_sh[n-1]=n;                                         //FOR BYDEFALT OR VERY SMALEST CONSIDER N FOR RIGHT SIDE
+        
+        for(int i=1;i<n;i++)
+        {
+            int prev=i-1;
+            while(prev >=0 && heights[prev]>=heights[i])
+            {                                                       
+                prev=left_sh[prev];
+            }
+            left_sh[i]=prev;                                         //FINDING LEFT SMALLEST  HEIGHT  INDEX
+        }
+        for(int i=n-2 ; i>=0;i--)
+        {
+            int prev=i+1;
+            while(prev<n && heights[prev]>=heights[i])
+            {
+                prev=right_sh[prev];                              
+            }
+            right_sh[i]= prev;                                      //FINDING RIGHT SMALEST HEIGHT   INDEX
+        }
+        for(int i=0;i<n;i++)
+        {
+            int width=right_sh[i]-left_sh[i]-1;                   //FIDING WIDTH-->(index of right smallest -index of ledt smallest -1)
+            max_area=Math.max(max_area,heights[i]*width);          //MAXIMUM AREA
+        }
+        return max_area;
+    }
+}
