@@ -1,0 +1,20 @@
+class Solution {                             // TC-->O(n) SP-->O(1) 
+    public int maxProfit(int[] prices) {     //for at most two transactions.
+        
+        int cost1=Integer.MAX_VALUE;
+        int profit1=0;
+        int cost2=Integer.MAX_VALUE;
+        int profit2=0;
+        
+        for(int price : prices)
+        {
+            cost1=Math.min(cost1,price);
+            profit1 =Math.max(profit1,price-cost1);
+            
+            cost2=Math.min(cost2,price-profit1);
+            profit2=Math.max(profit2,price-cost2);
+        }
+        
+        return profit2;
+    }
+}
