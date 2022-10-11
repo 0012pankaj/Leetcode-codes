@@ -1,0 +1,54 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        ArrayList<List<Integer>> res=new ArrayList<List<Integer>>();
+        
+        if(nums.length==0 || nums== null){
+            return res;
+        }
+         if( target==-294967296 || target==294967296){
+            return res;
+        }
+        
+        Arrays.sort(nums);
+        
+        for(int i=0;i<nums.length;i++)
+        {
+            int target_x = target-nums[i];
+            
+            for(int j=i+1 ;j<nums.length;j++){
+                
+                int target_y = target_x-nums[j];
+                
+                int start=j+1;
+                int end=nums.length-1;
+                
+                while(start < end){
+                    int twosum=nums[start]+nums[end];
+                    
+                    if(twosum<target_y)
+                    { ++start;}
+                    else if(twosum>target_y) {--end;}
+                    else{
+                        List<Integer> arr=new ArrayList<>();
+                             arr.add(nums[i]);
+                             arr.add(nums[j]);
+                             arr.add(nums[start]);
+                             arr.add(nums[end]);
+                           res.add(arr);
+                        
+                         // proceeding repetation
+                    while(start<end && nums[start]==arr.get(2)) ++start;
+                    // proceeding repetation
+                    while(start<end && nums[end]== arr.get(3)) --end;
+                }
+             }
+                // proceeding repetation
+                while(j+1 < nums.length && nums[j+1]==nums[j]) ++j;  
+            }
+            // proceeding repetation
+             while(i+1 <nums.length && nums[i+1]==nums[i]) ++i;  
+        }
+        return res;
+    }
+}
+       
