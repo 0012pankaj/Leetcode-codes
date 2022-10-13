@@ -1,0 +1,42 @@
+class Solution {
+                                                              //based on cyclic shot TC-->O(n) Sp-->O(1)  Hint to do cyclicShot--> the range [0, n] //amazon
+    static void swapp(int[]arr, int first,int second){
+              int temp=arr[first];
+               arr[first]=arr[second];
+               arr[second]=temp;
+    }
+    
+    
+    static void cyclicSort(int[] arr)
+    {
+        int i=0;
+        while(i<arr.length)
+        {   int c_i=arr[i];
+           if(arr[i]<arr.length && arr[i]!=arr[c_i])
+           {
+             swapp(arr,i,c_i);
+           }else{
+               i++;
+           }
+            
+        }
+    }
+    
+    public int missingNumber(int[] nums) {
+        cyclicSort(nums);
+
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]!=i){
+                 return i;                     //when n is present in array 
+            }
+        }
+        
+       return nums.length;              //when n is not present in array
+    }
+}
+
+/*In this we apply cyclic short first insted of( correct_index=arr[i]-1 )
+we take(  correct_index=arr[i] ) according to quection
+at last check value is on correct position or not  a[i]==i;when n is present in array 
+*/
