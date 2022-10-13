@@ -1,0 +1,29 @@
+class Solution {
+    //Apply cyclic shot hint: in the range [1, n],algorithm that runs in O(n), constant extra space. #amazone
+    
+    public List<Integer> findDuplicates(int[] arr) {
+           int i=0;
+        while(i<arr.length)                      //TC-->O(n) sp-->O(1)
+        {     int c_i=arr[i]-1;
+     
+            if(arr[i]!=arr[c_i])
+            {    int temp=arr[i];            //cyclicshort
+                 arr[i]=arr[c_i];           //swapping
+                 arr[c_i]=temp;
+                 
+            }else{
+                i++;
+            }
+        
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        
+        for(int j=0;j<arr.length;j++){
+            if(arr[j]!=j+1){
+                list.add(arr[j]);
+            }
+        }
+       return list; 
+        
+    }
+}
