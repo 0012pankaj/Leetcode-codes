@@ -1,0 +1,31 @@
+class Solution {
+    //apply cyclic shot Hint:try tu understand pattern of que, runs in O(n) time and uses constant extra space. #amazone
+                                          
+  public int firstMissingPositive(int arr[]){
+      int n=arr.length;
+      //sorting
+      int i=0;
+     while(i<n)                                                     //c_i -->correct_index
+    { int c_i=arr[i]-1;
+      if(arr[i]>0 && arr[i]<=n && arr[i]!=arr[c_i] )
+      { 
+          int temp=arr[i];          //at the time of shorting ignore -ve values and value greater than n
+          arr[i]=arr[c_i];
+          arr[c_i]=temp;
+      }else{
+          i++;
+      }
+        
+    }
+  //chech if value is not on its right index
+    for(int j=0;j<n;j++)
+    {
+        if(arr[j]!=j+1 ){
+           return j+1; 
+           
+        }
+    }
+    
+    return n+1;
+    }
+}
