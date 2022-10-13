@@ -1,0 +1,23 @@
+class Solution {
+    //apply cyclic shot Hints:the range [1, n], linear runtime complexity?,only constant extra space.#amazon
+    
+    public int findDuplicate(int[] arr) {
+         int i=0;
+        while(i<arr.length)                      //TC-->O(n) sp-->O(1)
+        {     int c_i=arr[i]-1;
+     
+            if(arr[i]!=arr[c_i])
+            {    int temp=arr[i];            //cyclicshort
+                 arr[i]=arr[c_i];           //swapping
+                 arr[c_i]=temp;
+                 
+            }else{
+                i++;
+            }
+        
+        }
+        
+        return arr[arr.length-1];
+    
+    }
+}
