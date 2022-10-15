@@ -1,0 +1,22 @@
+class Solution {
+                                                               //hashing IDEA: "the result must be Unique and you may return the result in Any order."
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> h=new HashSet<Integer>();                        //tc-->O(n) sp--->O(n)
+        for(int x:nums1)
+        {
+            h.add(x);
+        }
+        HashSet<Integer> l=new HashSet<Integer>();
+        for(int y:nums2){
+            if(h.contains(y)){
+                l.add(y);
+            }
+        }
+        int[] arr=new int[l.size()];
+        int i=0;
+        for(int z:l){
+            arr[i++]=z;
+        }
+        return arr;
+    }
+}
