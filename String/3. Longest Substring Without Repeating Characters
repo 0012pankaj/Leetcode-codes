@@ -1,0 +1,20 @@
+class Solution { 
+                                  //IDEA:use hash map to store each chararacter and there index and two pointer approch if  we 
+                                  found any char in map we jange our j pointer and i is already continued and at last find max length.
+    
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character,Integer> h=new HashMap<Character,Integer>();
+        int max=0;
+        for(int i=0,j=0 ; i<s.length();++i)
+        {
+            if(h.containsKey(s.charAt(i))){
+                j=Math.max(j,h.get(s.charAt(i))+1);
+            }
+            h.put(s.charAt(i),i);
+          max=Math.max(max,i-j+1);
+        }
+         
+        
+        return max;
+    }
+}   //TC-->O(n) sp-->O(1);
