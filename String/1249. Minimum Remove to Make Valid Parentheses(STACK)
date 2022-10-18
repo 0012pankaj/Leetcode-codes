@@ -1,0 +1,25 @@
+class Solution {
+                                                       //IDEA:withe help of STACK we easily tackel this type of problem
+    public String minRemoveToMakeValid(String s) {
+        Stack<Integer> stk=new  Stack<Integer>();
+        StringBuilder answer=new StringBuilder(s);       // use StringBuilder bcoz it is immutable
+        
+        for(int i=0 ;i<s.length();i++){
+            
+            if(s.charAt(i)=='('){
+                stk.push(i);  
+            }else if(s.charAt(i)==')'){
+                if(stk.size()>0 && s.charAt(stk.peek())=='('){                               //if pair match ( ) pop out from stack
+                    stk.pop();
+                }else{
+                    stk.push(i);
+                }
+            }
+        }                                                        // at last in stk only hold those valu that are need to removed out and hav no right pair
+        while(stk.size() >0 ){
+        answer.deleteCharAt(stk.pop());}
+        
+        return answer.toString();
+    }
+}
+//tc-->O(n) sp--O(n)
