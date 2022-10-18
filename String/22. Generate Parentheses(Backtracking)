@@ -1,0 +1,28 @@
+class Solution {
+                                                         //Idea:using back tracking we did it easily 
+    public List<String> generateParenthesis(int n) {
+        ArrayList<String> list=new ArrayList<String>();  //creat list
+        
+        bactrack_fun(list,"",0,0,n);                   //call a function and pass (list,empty string,open count,close count,given size)
+        return list;
+        
+    }
+    
+    public void bactrack_fun(ArrayList<String> list,String str,int open,int close,int n){
+        if(str.length()== 2*n){                      // base case on complition of one string we add it to list
+            list.add(str);
+            return ;
+        }
+        
+        if(open<n){                                    // if open perenthese are less then size add them
+             bactrack_fun(list,str+"(",open+1,close,n);
+        }
+        if(close<open){                              // if close  perenthese are less then open add them
+             bactrack_fun(list,str+")",open,close+1,n);
+        }
+    }
+}                                                    // all the function backtrack and give proper output
+
+/*The idea here is to only add '(' and ')' that we know will guarantee us a solution 
+(instead of adding 1 too many close). Once we add a '(' we will then discard it and try a ')'
+which can only close a valid '('. Each of these steps are recursively called.*/
