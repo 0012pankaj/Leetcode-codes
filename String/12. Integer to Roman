@@ -1,0 +1,18 @@
+class Solution {                                                     // tc-->O(n)  sp-->O(1) constant items to be added
+    public String intToRoman(int num) {
+        int integer[]={1000,900,500,400,100,90,50,40,10,9,5,4,1};
+        String c_arr[]={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+        
+        StringBuilder s=new StringBuilder();                       //USE APPEND PROPERTY
+        
+      for(int i=0;  i< integer.length ;i++){
+             while(num>=integer[i]){                                 //costant time itration in while
+               num=num-integer[i];
+               s=s.append(c_arr[i]);
+       }    
+          
+       }
+        
+        return s.toString();
+    }
+}
