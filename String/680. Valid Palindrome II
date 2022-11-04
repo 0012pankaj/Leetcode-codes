@@ -1,0 +1,33 @@
+class Solution {
+    
+    public boolean ispalindrom(String s,int st,int ed){
+        while(st<ed){
+            if(s.charAt(st)!=s.charAt(ed)){
+                return false;
+            }else{
+                st++;
+                ed--;
+            }                       
+        }
+        return true;
+    }
+    
+    public boolean validPalindrome(String s) {
+        int st=0;
+        int ed=s.length()-1;
+        while(st<ed)
+        {
+            if(s.charAt(st)==s.charAt(ed)){
+                st++;
+                ed--;
+            }else{
+                if(ispalindrom(s,st+1,ed)||ispalindrom(s,st,ed-1)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
