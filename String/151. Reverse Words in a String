@@ -1,0 +1,21 @@
+class Solution {                                    //using stringbuilder 
+    public String reverseWords(String s) {
+       int i=s.length()-1;
+        StringBuilder wrd=new StringBuilder();
+        StringBuilder ans=new StringBuilder();
+                                                         // start from last 
+        while(i>=0){
+            if(s.charAt(i)==' ' && wrd.length() != 0){
+                ans.append(" "+wrd);               // if word is not empty and i found space then append it in ans 
+                                                    // make sure instarting it alays have leading space at last we remove it
+             wrd=new StringBuilder();                 //initialise it to 0 again
+            } 
+            else if(s.charAt(i)!=' '){
+                wrd.insert(0,s.charAt(i));         // always insert character at 0 index 
+            }
+            i--;
+        }
+        ans.append(" "+wrd);                            // at last ,actual our first word in s  append at last
+        return ans.toString().trim();                      // remove that leading space
+    }
+}
