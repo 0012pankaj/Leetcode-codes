@@ -1,0 +1,31 @@
+class Solution {
+    public String largestNumber(int[] nums) {
+        
+        //conver into string array
+        
+        String arr[]=new String[nums.length];
+        for(int i=0;i<arr.length;i++){
+            arr[i]="" + nums[i];
+        }
+        
+        //sort array using comarator property of sort
+        //learn this point
+        
+        Arrays.sort(arr,(a,b)->(a+b).compareTo(b+a));
+        
+        //form string
+        
+        StringBuilder st=new StringBuilder("");
+        for(int i=arr.length-1;i>=0;i--){
+            st.append(arr[i]);
+        }
+        
+        //check for more zero
+        
+        if(st.charAt(0)=='0'){
+            return "0";
+        }
+        
+        return st.toString();
+    }
+}
