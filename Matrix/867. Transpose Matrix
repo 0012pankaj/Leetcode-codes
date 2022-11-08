@@ -1,0 +1,36 @@
+class Solution {
+    
+        public int[][] inplace(int[][] matrix) {
+         int n=matrix.length;
+          for(int i=0;i<n;i++)
+            for(int j=i+1;j<n;j++)
+            {                                       //swaping(matrix[i][j],matrix[j][i])
+                 int temp=matrix[i][j];
+                 matrix[i][j]=matrix[j][i];          //(I)TRANSPOSE OF MATRIX
+                 matrix[j][i]=temp;
+                
+            }
+              return matrix; 
+
+        }
+
+    public int[][] transpose(int[][] matrix) {
+        
+         int r=matrix.length;
+         int c=matrix[0].length;
+        
+        if(r==c){
+          inplace(matrix); // approch 1 if r and c are equal
+         return matrix;
+        }
+        
+                           // when row and column are not equal
+        int arr[][]=new int[c][r];
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                arr[j][i]=matrix[i][j];
+            }
+        }
+       return arr;
+    }
+}
