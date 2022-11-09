@@ -1,0 +1,62 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int r=matrix.length;
+        int c=matrix[0].length;
+                               //step1 :take bolean row and col as falag
+        boolean raw=false;
+        boolean col=false;
+        
+                                //step2:check 0 in first raw and first col if contain change flag
+        for(int i=0;i<r;i++){
+            if(matrix[i][0]==0){
+                col=true;
+            }
+        }        
+         for(int i=0;i<c;i++){
+            if(matrix[0][i]==0){
+                raw=true;
+            }
+        }        
+        
+                                //step3: leave raw 1 and cal 1 start from index [1][1] check 0 and mark in raw 1 and cal 1 at that index
+        for(int i=1;i<r;i++){
+            for(int j=1;j<c;j++){
+                if(matrix[i][j]==0){
+                    matrix[i][0]=0;
+                    matrix[0][j]=0;
+                }
+            }
+        }
+        
+                                      //step4:mark that raw and col zero that contain zero withe help of r1 and c1 where we mark 0 
+        for(int i=1;i<r;i++){
+            if(matrix[i][0]==0){
+                for(int j=0;j<c;j++){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        
+        for(int i=1;i<c;i++){
+            if(matrix[0][i]==0){
+                for(int j=0;j<r;j++){
+                    matrix[j][i]=0;
+                }
+            }
+        }
+        
+                                                //step 5: with the help of flag if true mark r1 0 or c1 0
+        if(raw){
+            for(int i=0;i<c;i++){
+                matrix[0][i]=0;
+            }
+        }
+         if(col){
+            for(int i=0;i<r;i++){
+                matrix[i][0]=0;
+            }
+        }
+        
+  
+    }
+}
