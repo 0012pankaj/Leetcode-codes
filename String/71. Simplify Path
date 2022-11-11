@@ -1,0 +1,55 @@
+class Solution { 
+                                                              // USE STACK
+    public String simplifyPath(String path) {
+        String[] str=path.split("/");                          // SPLIT ON THE BASES OF /
+        Stack<String> st= new Stack<String>();
+        
+        for(String i:str){
+            if(i.equals("")||i.equals(".")||i.equals("..") && st.isEmpty()) continue;
+            else if(i.equals("..") && !st.isEmpty()){                                       //(..)-->pop ,(.)("")-->continue; else push to stack any name
+                st.pop();
+            }  
+            else
+                st.push(i);
+            
+        }
+        
+        StringBuilder ans=new StringBuilder();        
+        if(st.isEmpty()){
+            return "/";
+        }
+        while(!st.isEmpty()){
+            ans.insert(0,st.pop()).insert(0,"/");                // add to string reverse order of stack by inserting at 0 index every name is seprated by "/"
+        }
+        
+        return ans.toString();
+    }
+}
+
+
+
+2.method:-
+
+class Solution {
+    public String simplifyPath(String path) {
+        
+        Stack<String> st=new Stack<String>();
+        String[] str=path.split("/");
+        
+        for(String i:str){
+            if(i.equals(""))continue;
+            else if(i.equals("."))continue;
+            else if(i.equals("..")){
+                if(!st.isEmpty())
+                    st.pop();
+                else
+                    continue;
+            }
+            else st.add(i);
+            
+            
+           
+        }
+         return "/"+String.join("/",st);
+    }
+}
