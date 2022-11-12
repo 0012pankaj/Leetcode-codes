@@ -1,0 +1,17 @@
+class Solution {                                          //tc--.O(n)   sp-->O(1)
+    public ListNode reverseList(ListNode head) {
+        if(head==null) return head;
+        if(head.next==null) return head;
+            ListNode  prev=null;
+            ListNode curr=head;
+            ListNode  nxt=null;
+        while(curr!=null){
+            nxt=curr.next;                  //1.inisialise  next  for itration
+            curr.next=prev;                    //2.assign preveious value as curent next
+            prev=curr;                       //3  made curent node as previous for next up coming node
+            curr=nxt;                         // 4.for itration purpos change cur value as next
+        }
+        
+        return prev;                  //return preveus because or currebt is become null as loop stops
+    }
+}
