@@ -1,0 +1,10 @@
+class Solution {                                       //without referenc # head,i just put next data in cureent node and repeat this upto last
+    public void deleteNode(ListNode node) {
+        while(node !=null){                          //best approch
+            node.val=node.next.val;
+            if(node.next.next==null) break;
+            node=node.next;
+        }
+        node.next=null;
+    }
+}
