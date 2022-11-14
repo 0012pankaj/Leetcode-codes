@@ -1,0 +1,34 @@
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+                                   // two pointer approch our pointer are fast and slow
+        ListNode fast=head;
+         ListNode slow=head;
+                                   // we use start_k to store position from starting                                
+        ListNode start_k=head;
+       
+        int count=1;
+       while(fast.next !=null & count<k)
+       {
+            fast=fast.next;
+           count++;
+       }
+        
+        start_k=fast;
+        
+                                           // to get lst position in slow
+        while(fast.next != null){
+            fast=fast.next;
+            slow=slow.next;
+            
+        }
+      
+        
+        // do swaping of value
+        int temp=start_k.val;
+        start_k.val=slow.val;
+        slow.val=temp;
+        
+        
+        return head;
+    }
+}
