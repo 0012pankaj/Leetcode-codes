@@ -1,0 +1,32 @@
+public class Solution {
+  
+    //I:using floyd loop detection Algorithum find is it loop/cyclic or not
+    public ListNode detectCycle(ListNode head) {
+        ListNode s=head;
+        ListNode f=head;
+        
+        while(f!= null && f.next !=null){
+            s=s.next;
+            f=f.next.next;
+            
+            if(f==s)
+                break;
+            }
+        
+  //II:on geting s as intersection point we move intersection(s) and head by 1 step and where the are on same node that node is our Begning of cyclic loop  
+        
+        if(f==null ||f.next == null){
+           return null;
+        }
+            
+        while(s != head){
+           head=head.next;
+            s=s.next;
+        }
+        return head;
+    }
+}
+
+
+
+..........................................MY First APPROCH USING FUNCTION.............................>
