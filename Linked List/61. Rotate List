@@ -1,0 +1,33 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+                                                //fore base cases
+        if(head==null) return null;
+        if(head.next==null||k==0) return head;
+        
+         ListNode newhead=head;
+         ListNode curr=head;
+                                           //we count length of list and pint end node to head
+        int c=1;
+        while(curr.next!=null){
+            curr=curr.next;
+            c++;
+        }
+        curr.next=head;
+                                 // take k%length of list as it may b greater then list  and move up to (len-k) term at last  point (len-k)node to null
+        k=k%c;
+        for(int i=1;i<c-k;i++){
+            head=head.next;
+        }
+        
+        newhead=head.next;
+        head.next=null;
+        
+        return newhead;
+        
+    }
+}
+
+IDEA:
+1.first find length
+2.point last pointer to head
+3.pint (len - k)th next to null and its next is our new head
