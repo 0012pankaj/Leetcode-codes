@@ -1,0 +1,44 @@
+class Solution {
+      public static ListNode halfreverselist(ListNode head)
+     {
+      
+        ListNode prev=null;
+        ListNode curr=head;
+        ListNode next=null;
+        while(curr != null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        
+        return prev;
+     }
+    
+    public boolean isPalindrome(ListNode head) {
+                                                                              //1.first find middle of linklist using two pointer approch.
+      ListNode slow=head;
+      ListNode fast=head;
+      
+      while(fast.next !=null && fast.next.next !=null)
+      {   slow=slow.next;
+          fast=fast.next.next;
+       }
+                                                                              //2.reverse the remainning list
+      
+      ListNode rev =  halfreverselist(slow.next);
+      ListNode currnt=head;
+      
+                                                                         //3.compare from start of orignal and head of halfreverselist 
+      while(rev != null){
+          
+          if(rev.val != currnt.val){
+              return false; 
+          }
+          rev=rev.next;
+          currnt=currnt.next;
+      }
+         return true;
+        
+    }
+}
