@@ -1,0 +1,101 @@
+(imp que for interview:- why we prefer quickshort  in array and not mergeshot and for linked list we prefer mergeshot?
+-->we prefer mergeshort in linked list as it implement on linkedlist without extra space and linkdlist have not in contigues memory
+--> we prefer quickshort in arrays  it doesnot require extra space where in arrays mergeshort require O(n) space in arrays which  increase runtime both 
+have O(nlogn) Avg tc,and quick shot is tail Recursive)
+
+class Solution {  //easy to understend plz try ones-->
+    
+    //............merging to sorted list................................... 
+    public static ListNode merging(ListNode left,ListNode right)
+  {  
+      if(left==null){
+          return right;
+      }
+       if(right==null){
+          return left;
+      }
+      
+      ListNode cur=new ListNode(0);
+      ListNode temp=cur;
+      
+      while(left !=null && right !=null){
+          if(left.val < right.val)
+          {
+              temp.next=left;
+              temp=left;
+              left=left.next;
+          }else{
+              
+              temp.next=right;
+              temp=right;
+              right=right.next;
+          }
+        
+      }
+        while(left!=null){
+              temp.next=left;
+              temp=left;
+              left=left.next;
+          }
+          
+           while(right!=null){
+              temp.next=right;
+              temp=right;
+              right=right.next;
+          }
+          
+     return cur.next;
+  }
+  
+  //.............finding mid value................................
+   public static ListNode givmid(ListNode head)
+   {     //1.divide it in two parts
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast.next !=null && fast.next.next != null )
+        {   slow=slow.next;
+            fast=fast.next.next;
+            
+        }
+              
+       return slow;
+   }
+   
+    
+    public ListNode sortList(ListNode head) {
+                                                                              //BEST APPROCH:-TC o(nlog(n) )  Sp--> (1)
+        if(head == null || head.next==null) return head;
+        
+                                                                                //1.find mid head using two pointer and divide it in two parts
+        
+        ListNode mid=givmid(head);
+                                                                                  //2.on the basis of mid find right and made left
+       
+        ListNode left=head;
+        ListNode right=mid.next;
+        mid.next=null;
+       
+                                                                                          //3.short two parts using recursion call
+       
+       left=sortList(left);
+       right=sortList(right);
+        
+                                                                                                //4. merge two sorted array 
+       
+       ListNode newhead=merging(left,right);
+       
+       return newhead;       
+        
+    }
+}
+
+..........................................
+What is the benefit of using singly linked lists in merge sort compared to arrays?
+
+It turns out that Mergesort works even better on linked lists than it does on arrays.
+It avoids the need for the auxiliary space, and becomes a simple,
+reliably O(N log N) sorting algorithm. And as an added bonus, it's stable too.
+
+-->we prefer mergeshort in linked list as it implement on linkedlist without extra space and linkdlist have not in contigues memory
+--> we prefer quickshort in arrays  it doesnot require extra space where in arrays mergeshort require O(n) space in arrays which  increase runtime both 
+have O(nlogn) Avg tc,and quick shot is tail Recursive
