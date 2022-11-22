@@ -1,0 +1,37 @@
+Given an array of integers nums and an integer k, return the number of contiguous subarrays 
+where the product of all the elements in the subarray is strictly less than k.
+
+................................................
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+                                                                             //apply:SlidingWindow(variable size)
+                                     //1.take two pointer
+        
+        int si=0;
+        int ei=0;
+        int product=1;
+        int ans=0;
+        
+                                //2.increas Size of window
+        
+        while(ei<nums.length){
+                                //do product while increasing window
+            product*=nums[ei];
+            
+                             //3.deacreas size when condition not match
+            
+            while(product >= k && si <= ei){
+                product=product/nums[si];
+                si++;
+            }
+            
+                                 // 4.count subarrays
+            ans+=ei-si+1;         //[ei-si+1]is size of subarray-->logic:(size of array == no. of new sub arrays)
+            
+            ei++;
+        }
+        
+        return ans;
+        
+    }
+}
