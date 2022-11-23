@@ -1,0 +1,35 @@
+
+
+public int characterReplacement(String s, int k) {                     //tc-->O(n) sp->O(26) max
+                                                                 // Approch: using Sliding window & hashMap
+        HashMap<Character,Integer> mp=new HashMap<Character,Integer>();
+        int si=0;
+        int ei=0;
+        int maxoccur=0;
+        int maxwindow=0;      //subarray/maxwindow
+        
+        while(ei < s.length())
+        {
+                                                                  //count frequency && grow window -->we made frequrncy map and count maxoccur on each step
+            char rightchar=s.charAt(ei);
+            mp.put(rightchar,mp.getOrDefault(rightchar,0)+1);
+               
+             maxoccur=Math.max(maxoccur,mp.get(rightchar));
+            
+                                                             //shrink of window  ..> window size-max occuring is == remaning character if they are greater
+                                                             //then k we shrink and remove there count from hash map also
+               if(ei-si+1 - maxoccur > k )
+               {
+                   char leftchar=s.charAt(si);
+                   mp.put(leftchar,mp.get(leftchar)-1);          // as the remaning char are not greater than k we can flip them and made actual window
+                   si++;
+               }
+            
+                                                           //calculate ans
+            maxwindow=Math.max(maxwindow,ei-si+1);
+               
+            ei++;
+        }
+        return maxwindow;
+        
+        //take help yt-Umang Mavani
