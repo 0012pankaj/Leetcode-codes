@@ -1,0 +1,65 @@
+class Solution {
+    public String minWindow(String s, String t) {
+                          //Approch :sliding window && frequency arr
+        int freqt[]=new int[123];
+        int freqs[]=new int[123];
+                         // made a frequency of string t element
+        for(int i=0;i<t.length();i++)
+        {
+            char ch=t.charAt(i);
+           freqt[ch]++;
+            
+        }
+                       //some require element for sliding window
+        int si=0;
+        int ei=0;
+        int  counter=0;
+        int len=Integer.MAX_VALUE;
+        int starting=-1;
+        
+        //SLIDING WINDOW
+        while(ei<s.length())
+        {
+            //GROW
+            freqs[s.charAt(ei)]++;
+            if(freqt[s.charAt(ei)] >= freqs[s.charAt(ei)] ){
+                counter++;
+            }
+            
+            //SHrink
+            if(counter==t.length())
+            {
+                while(freqt[s.charAt(si)] < freqs[s.charAt(si)] && si<=ei)
+                {   freqs[s.charAt(si)]--;
+                    
+                     si++;
+                }
+                         //CALCULATE
+                  if(len > ei-si+1)
+                 {
+                    len=ei-si+1;
+                     starting=si;
+                  } 
+            }  
+            ei++;
+        }
+        
+        if(starting==-1)
+        {
+          return "";  
+        }
+       
+        return s.substring(starting,starting+len);
+    }
+}
+/*IDEA: for finding minimum size window 
+1.we take two frequency array that store count of characters of string t and s
+first we made frequency arr of T string.
+2.we initialize some variables that help us to perform sliding window-->counter=for count no of element matche to freq T arr
+len=to store window len initialy take maxValue as we ar going to find min value
+3.perform SLIDING WINDOW
+ 3.1:GROW----->we start storing frequency of S arr window one by one ,and increase count upto which we reach frequency of ch in S equals to ch of T.
+ 3.2:Shrink--->if our counter is equals to length of T string it mean our window have all req character, and no we try to remove extra ch from start of window one by one. and also decrease the frequency in S freq arr.
+ 3.3CALCULATE-->in each stpepmdurink SHRINK we calculate small length and store starting index of window 
+4.at last we return our substring  of smalest length 
+ 
