@@ -1,0 +1,14 @@
+Given an integer array nums, find three numbers whose product is maximum and return the maximum produc
+
+class Solution {
+    public int maximumProduct(int[] arr) {
+         Arrays.sort(arr);
+        int s=arr.length;
+        int a1=arr[s-1]*arr[s-2]*arr[s-3];
+        int a2=arr[0]*arr[1]*arr[s-1];
+
+        int ans=Math.max(a1,a2);
+
+        return ans;
+    }
+}
