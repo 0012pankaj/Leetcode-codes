@@ -12,3 +12,7 @@ class Solution {
         return ans;
     }
 }
+
+
+//Idea:sort and last three element product is greater if all are positive number but if it contain negitive 
+//we take  after sorting starting 2 no. - * - give + and last no which is max positive no.
