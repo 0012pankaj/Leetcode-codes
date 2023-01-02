@@ -1,0 +1,43 @@
+class Solution {
+    public String smallestNumber(String pattern) {
+        //step 1: create strings
+        StringBuilder str=new StringBuilder();
+         StringBuilder res_str=new StringBuilder();
+
+         //step 2 run loop
+         for(int i=0;i<=pattern.length();i++)
+         {   
+             //step 3; append at str 
+             str.append((char)('1'+ i));
+             if( i == pattern.length() || pattern.charAt(i)=='I')
+             {    
+                 //step 4: revrse and append str when we get 'I' or reach at end
+                  res_str.append(str.reverse());
+                  str=new StringBuilder();
+             }
+         }
+      return res_str.toString();  
+    }
+}
+
+----------------------------------
+1 2 3 4 5 6 7 8 9
+D D I D D I D D
+
+Match the input string and the sequence 1,2,3,4,5,6,7,8,9.
+Reverse all numbers between "I".
+
+For example:
+first 'I' at 3, then reverse 1,2,3, we have 3,2,1
+second 'I' at 6, then reverse 4,5,6, we have 6,5,4
+Reverse the last group 7,8,9, we have 9,8,7
+
+Final result for D D I D D I D D,
+is 3,2,1,6,5,4,9,8,7
+
+We can have multiple approach to implement this process.
+
+
+Complexity
+Time O(n)
+Space O(n)
