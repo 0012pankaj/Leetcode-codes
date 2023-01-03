@@ -1,0 +1,59 @@
+class Solution {             //easy to understand 
+    public int calculate(String s) {
+        Stack<Integer> st=new Stack<Integer>();
+        char sign='+';                                 //use stack to solve
+        
+        for(int i=0;i<s.length();i++)
+        {   
+            char c=s.charAt(i);               // itracte each char
+            
+            if(Character.isDigit(c))           //check is it a digit using [ Character.isDigit(c) ]
+            {
+                int num=0;
+                while(i<s.length() && Character.isDigit(s.charAt(i)))    // find continues digit to form it single number
+                { 
+                    num=num*10+(s.charAt(i)-'0');
+                    i++;
+                }
+                i--;
+                                                             // perform oprations on number formed
+                                                           // if sign--? + - (only push )
+                if(sign == '+'){
+                    st.push(num);
+                }
+                else if(sign== '-'){
+                    st.push(-num);
+                }
+                else if(sign =='*'){
+                    st.push(st.pop()*num);
+                }
+                else if(sign =='/'){
+                    st.push(st.pop()/num);
+                }
+                
+            }
+            else if(c != ' ')                // if char is not digit not space then itshould be sign
+            {
+                sign=c;
+            }
+           
+        }
+                                      // at last add one by every element of stack and return as integer value
+                                              //it is high chance that at last it only contain single value aulthough we check is itempty or not
+        int res=0;
+        while(!st.isEmpty()){
+            res+=st.pop();
+        }
+        
+        
+        return res;
+        
+    }
+}
+
+
+ /*if the last operation was multiplication or division, 
+                    pop the last number from stack and perform the operation on 
+                    current number and the number from stack and 
+                    add the result back to the stack.                    
+                    */
