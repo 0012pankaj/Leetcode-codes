@@ -1,0 +1,45 @@
+class Solution {
+        public static int perform(int o1,int o2,String s){
+            switch(s){
+                case "+": 
+                   return o2+o1;
+                  
+                case "-": 
+                   return o2-o1;
+                  
+                case "*": 
+                   return o2*o1;
+           
+                case "/": 
+                   return o2/o1;
+                             
+                default:
+                   return 0;
+                
+            }
+        }
+       
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stk =new Stack<Integer>();
+           // to convert in to integer Integer.valueOf() 
+
+        //  for(int i=0;i<tokens.length;i++)
+        //  { 
+        //      if("+-*/".contains(tokens[i]))
+        //       stk.push(perform(stk.pop(), stk.pop(), tokens[i]));
+        //     else
+        //       stk.push(Integer.valueOf(tokens[i]));       
+        //  }
+
+         //or
+         for(String t : tokens){
+            if("+-*/".contains(t))
+              stk.push(perform(stk.pop(), stk.pop(), t));
+            else
+              stk.push(Integer.parseInt(t));
+        }
+
+         return stk.peek();
+        
+    }
+}
