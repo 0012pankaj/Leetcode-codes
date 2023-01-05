@@ -1,0 +1,29 @@
+class StockSpanner {   //THIS QUECTION IS SIMMILAR TO (STOCK SPAN PROBLEM) OF GFG
+    //step 1:initialize stack of int array
+    Stack<int []> st ;
+    public StockSpanner() {
+        st=new Stack<>();
+    }
+    
+    public int next(int price) {
+    //step 2: intialy span is 1 
+     int span=1;
+
+    //step 3: if we found prise less than curent prise we just remove that from stack 
+             //and add its span to current span  and push it later here [0]=price  [1]=span
+    while(!st.isEmpty() && st.peek()[0] <= price){
+           span+=st.peek()[1];
+           st.pop();
+       }
+    st.push(new int []{price,span});
+
+
+    //step4: return span of each price 
+    return span;
+
+    }
+}
+
+//Explain:-
+//.every price have atleast 1 span and we need to check on leftside of every prise is 
+//there smallest present if present contiguesly add 1 more  every time to its span upto which we get greater number  tc-->O(n)
