@@ -1,0 +1,108 @@
+class Solution {    //Approch 2  using stack  
+                              /*// best approch with less itration and use index of hist array and Single stack to find ans.
+                              //also done by using 2 extra array of left smaller and right smaller*/
+
+    public int largestRectangleArea(int[] hist) {
+      int n=hist.length;
+
+      //step 1:
+        Stack<Integer> s=new Stack<Integer>();
+        
+        int tp;
+        int areawith_tp=0;
+        int maxarea=0;
+        
+        //step2:
+        //2.1
+        int i=0;
+        while(i<n)
+        {  //2.2
+           if(s.isEmpty() || hist[s.peek()] <= hist[i]){
+            s.push(i++);
+               
+           }//2.3
+           else{
+               tp=s.pop();
+               
+               areawith_tp=hist[tp]*(s.isEmpty() ? i : i-s.peek()-1) ;
+               
+               maxarea=Math.max(maxarea,areawith_tp) ;
+               
+           }
+               
+         }
+        //step 3:
+        while(!s.isEmpty()){
+             tp=(int)s.pop();
+               
+               areawith_tp=hist[tp]*(s.isEmpty() ? i : i-s.peek()-1) ;
+               
+               maxarea=Math.max(maxarea,areawith_tp) ;
+        }
+        
+        return maxarea;
+
+
+        
+    }
+}
+
+/* APPROCH:-
+
+	1.Create an empty stack.
+2.Start from the first bar, and do the following for every bar hist[i] where ‘i‘ varies from 0 to n-1
+    If the stack is empty or hist[i] is higher than the bar at top of the stack, then push ‘i‘ to stack. 
+    If this bar is smaller than the top of the stack, then keep removing the top of the stack while the top of the stack is greater. 
+    Let the removed bar be hist[tp]. Calculate the area of the rectangle with hist[tp] as the smallest bar. 
+     For hist[tp], the ‘left index’ is previous (previous to tp) item in stack and ‘right index’ is ‘i‘ (current index).
+ 3.If the stack is not empty, then one by one remove all bars from the stack and do step (2.2 and 2.3) for every removed bar
+*/
+
+-----------------------------------------
+#HELP FROM-   Approch 1 basic
+Algorithms Made Easy
+IDEA:for each index find Left boundry(which is smalest hight then current)  and 
+            Right boundry(which is smalest hiht at right side then current).
+		Withe the help of this we find our width=				
+		WIDTH-->(index of right smallest -index of ledt smallest -1)
+		HEIGHT-->current element
+		At last find MAXIMUM AREA
+		
+		sol:-
+		class Solution {                                           //TC-->o(N)  sp-->O(N)
+    public int largestRectangleArea(int[] heights) {
+        int n=heights.length;
+        if(n==0) return 0;
+         int max_area=0;
+         int left_sh[]=new int[n];                            //CREAT ARRAY FOR STORING LEFT SMALLEST HEIGHT AT EACH INDEX
+        int right_sh[]=new int[n];                                  //CREAT ARRAY FOR STORING RIGHT SMALLEST HEIGHT AT EACH INDEX
+        left_sh[0]=-1;                                       //FOR BYDEFALT OR VERY SMALEST CONSIDER -1FOR LEFT SIDE
+        right_sh[n-1]=n;                                         //FOR BYDEFALT OR VERY SMALEST CONSIDER N FOR RIGHT SIDE
+        
+        for(int i=1;i<n;i++)
+        {
+            int prev=i-1;
+            while(prev >=0 && heights[prev]>=heights[i])
+            {                                                       
+                prev=left_sh[prev];
+            }
+            left_sh[i]=prev;                                         //FINDING LEFT SMALLEST  HEIGHT  INDEX
+        }
+        for(int i=n-2 ; i>=0;i--)
+        {
+            int prev=i+1;
+            while(prev<n && heights[prev]>=heights[i])
+            {
+                prev=right_sh[prev];                              
+            }
+            right_sh[i]= prev;                                      //FINDING RIGHT SMALEST HEIGHT   INDEX
+        }
+        for(int i=0;i<n;i++)
+        {
+            int width=right_sh[i]-left_sh[i]-1;                    //FIDING WIDTH-->(index of right smallest -index of ledt smallest -1)
+            max_area=Math.max(max_area,heights[i]*width);          //MAXIMUM AREA
+        }
+        return max_area;
+    }
+}
+						
