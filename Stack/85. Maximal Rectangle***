@@ -1,0 +1,87 @@
+class Solution {   //Approch: idea of [Maximum area in histogram]
+     
+    //maximum_histogram function$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
+    public static int maximum_histogram(int M[],int m){
+        
+        Stack<Integer> s= new Stack<Integer>();
+        int tp;
+        int  areawith_tp=0;
+        int maximumarea=0;
+        
+        int i=0;
+        while(i < m){
+             
+             if(s.isEmpty() || M[s.peek()] <= M[i]){
+                 s.push(i++);
+             }
+             else{
+                 tp=s.pop();
+                 
+                 areawith_tp=M[tp]*(s.isEmpty() ? i : (i-s.peek()-1)) ;
+                 
+                 maximumarea=Math.max(maximumarea,areawith_tp);
+             }
+
+        }
+        while(!s.isEmpty()){
+                tp=s.pop();
+                 
+                 areawith_tp=M[tp]*(s.isEmpty() ? i : i-s.peek()-1) ;
+                 
+                 maximumarea=Math.max(maximumarea,areawith_tp);
+         
+        }
+       
+       return maximumarea; 
+    }
+   //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$44 
+    
+    //start------------>
+    public int maximalRectangle(char[][] Mat) {
+    
+       int n=Mat.length; //row
+        int m=Mat[0].length;//col
+        int  M[][]=new int[n][m];
+   // converting char[][] to int[][] ------------------------
+   
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+
+                if(Mat[i][j]=='0'){
+                M[i][j]=0;
+                }else{
+                     M[i][j]=1;
+                }
+            }
+        }  
+        
+  //--------------------------------------------------------
+
+         int res=maximum_histogram(M[0],m);
+        
+        for(int i=1;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(M[i][j]==1){
+                    M[i][j]+=M[i-1][j];
+                }
+            }  
+            res=Math.max(res,maximum_histogram(M[i],m));
+        }
+        
+        return res;
+        
+    }
+}
+
+........................................................................................................................................................................
+APPROCH:
+--> we found maximum histogram of every row
+1.first we find maximum histogram of first row and then compair it result with other
+2.for next rows if element is = to 1 then add that alement with its previous elemnt col wise build histogram of every rowwith help of its upper row
+simply find  maximum area of histogram 
+[must go to  [Maximum Rectangular Area in a Histogram****************] in DSA CODE]
+or
+Run a loop to traverse through the rows.
+Now If the current row is not the first row then update the row as follows, if matrix[i][j] is not zero then matrix[i][j] = matrix[i-1][j] + matrix[i][j].
+Find the maximum rectangular area under the histogram, consider the ith row as heights of bars of a histogram. This can be calculated as given in this article Largest Rectangular Area in a Histogram
+Do the previous two steps for all rows and print the maximum area of all the rows.
