@@ -1,0 +1,52 @@
+class Solution {                                                      // Use of monotonic stack  we find left[]  and right[]
+    public int sumSubarrayMins(int[] a) {
+
+        int Mod=(int)Math.pow(10,9)+7;
+        int n=a.length;
+        int left[]=new int[n];
+        int right[]=new int[n];                              //given [3,1,2,4]
+ 
+        Stack<Integer> s=new Stack<Integer>();
+
+                                                          // Step1:find array of Left nearest smallest    //left[1,2,1,1] 
+        s.push(0);
+        left[0]=1;
+        for(int i=1;i<n;i++)
+        {
+            while(!s.isEmpty() && a[s.peek()] >= a[i]){
+                  s.pop();
+            }
+
+            left[i]=(s.isEmpty() ? (i+1) : (i-s.peek()));
+
+            s.push(i);
+        }
+
+          s.clear();
+                                                              //Step 2:find array of Right nearest smallest   //right[1,3,2,1]
+
+        s.push(n-1);
+        right[n-1]=1;
+        for(int i=n-2;i>=0;i--)
+        {
+            while(!s.isEmpty() && a[s.peek()] > a[i]){
+                  s.pop();
+            }
+
+            right[i]=(s.isEmpty() ? (n-i) : (s.peek()-i));
+
+            s.push(i);
+        }
+      
+                                                                       //  step 3: ans is sum of (a[i]*left[i]*right[i]) for every value ina array
+        long ans = 0;
+
+        for(int i=0 ; i<n ;i++)
+        {
+            ans=(ans + (long)a[i]*left[i]*right[i])%Mod;
+        }
+
+        return (int)ans;
+       
+    }
+}
