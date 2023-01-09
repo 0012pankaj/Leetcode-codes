@@ -1,0 +1,53 @@
+class MyStack {
+                                                                  //we use 2 Queue 
+      Queue<Integer> q1=new LinkedList<Integer>();
+      Queue<Integer> q2=new LinkedList<Integer>();
+      public int curr_size;
+      
+    public MyStack() {
+        curr_size=0;
+    }
+    
+    public void push(int x) {
+        curr_size++;
+                                                                     //we always take input in q2 which is always empty
+        q2.add(x);
+                                                              //after adding input to q2 now move all elements of q1 to q2.  
+        while(!q1.isEmpty())
+        {
+            q2.add(q1.peek());
+            q1.remove();
+        }
+                                                                      // made again q2 empty
+        Queue <Integer> temp=q1;
+        q1=q2;
+        q2=temp;
+    }
+    
+    public int pop() {
+        if(q1.isEmpty()){
+            return -1;
+        }
+         curr_size--;
+       return q1.poll();
+    }
+    
+    public int top() {
+         if(q1.isEmpty()){
+            return -1;
+        }
+        return q1.peek();
+    }
+    
+    public boolean empty() {
+       return q1.isEmpty();
+    }
+}
+
+/*Approch: LIFO
+1.we use two Queue q1[] and q2[]
+2.always take input in q2 (it is always empty)during push and
+move all elements of q1 to q2 it make the pushed item at first position
+3. swap bot q as we need q2 always empty
+4at pop(): we check q1 and return first value as it is last pushed
+ using[.poll()]->remove and give output.
