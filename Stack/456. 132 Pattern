@@ -1,0 +1,36 @@
+class Solution {          // use MONOTONIC STACK
+    public boolean find132pattern(int[] nums) {
+     
+     int l=nums.length;
+       
+       Stack<Integer> s=new  Stack<Integer>();
+       int secondmax=Integer.MIN_VALUE;
+
+       for(int i=l-1; i>=0;i--){
+
+            if(secondmax>nums[i]) return true;
+
+            while(!s.isEmpty() && nums[i]>s.peek())
+            {
+                secondmax=Math.max(s.pop(),secondmax);
+            }
+ 
+            s.push(nums[i]);
+       }
+
+       return false;
+    }
+}
+
+//#coding decoder
+/*Approch:
+1.use a Stack that contain the maximum value of all
+2.use secondmax that contain second max vareable
+3 we start from last and if we get an element which is smaller than second max 
+than we return true else no element is there at last return false
+Acc to que:
+stack contain max value -->nums[j]
+secondmax--->nums[k]
+if we get smaller than second max that mean that is nums[i] 
+nums[i]<nums[k]<nums[j]
+hense return true.
