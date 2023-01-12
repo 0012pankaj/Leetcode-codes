@@ -1,0 +1,63 @@
+class Solution { 
+    public int nextGreaterElement(int n) {
+
+                                                         //convert int to char array (int to string to char array)
+        char[] arr=(n+"").toCharArray();
+        int l=arr.length;
+
+                                                            //step 1:find first swap number
+        int i=l-2;
+        for(; i>=0 ;i-- )
+        {
+            if(arr[i]<arr[i+1]){
+                break;
+            }
+        }
+        
+                                                        //if reach at start in case af all same or number is in decreasiong order [4,3,2,1] or [9,9,9,9]
+        if(i==-1){
+           return -1;
+        }
+       
+                                                             //step 2:find next greatest element then arr[i] from right
+       int j=l-1;
+       for(;j>=0;j--)
+       {
+           if(arr[j]>arr[i]){
+               break;
+           }
+
+       }
+
+                                                                   //step 3: swap arr[i] ,arr[j]
+
+       char temp=arr[i];
+       arr[i]=arr[j];
+       arr[j]=temp;
+
+    
+                                                                         //covert into string   
+                                                                    //    (first convert in to string than int )
+
+        //first store element 0 to 1
+        //then last to i+1 (reverse order)
+        String s="";
+        for(int k=0;k<=i;k++)
+        {
+            s=s+arr[k];
+        }
+        for(int k=l-1;k>i;k--)
+        {
+            s=s+arr[k];
+        }
+         
+                                                 //to handel condition of greater then 32 bit integer value
+         int ans;
+         try{
+       ans=Integer.parseInt(s);
+         }catch(Exception e){
+            return -1;
+         }
+         return ans;
+    }
+}
