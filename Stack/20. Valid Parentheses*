@@ -1,0 +1,54 @@
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+
+__________________________________________________________________________Tc-->O(n)  Sp--->O(n)
+class Solution {
+    public boolean isValid(String x) {
+        
+        Stack<Character> stk=new Stack<Character>();
+
+        for(char c: x.toCharArray())
+        {
+            if(stk.isEmpty())
+            {
+             stk.push(c);
+            }
+            else
+            { 
+                char topchar= stk.peek();
+
+                if(topchar=='(' && c==')'){
+                    stk.pop();
+                }else if(topchar=='{' && c=='}')
+                {
+                    stk.pop();
+                }
+                else if(topchar=='[' && c==']'){
+                    stk.pop();
+                }else{
+                    stk.push(c);
+                }
+
+                
+            }
+        }
+
+        return stk.isEmpty();
+      
+    }
+}
+/*Approch:-
+1.create stack,run loop 
+2.if stack is empty  push character
+3.if not empty check top character and match pair to current characater then pop top
+else push that in stack
+4.at last if stack is empty then return true else false
