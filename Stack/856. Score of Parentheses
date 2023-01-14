@@ -1,0 +1,55 @@
+Example 1:
+
+Input: s = "()"
+Output: 1
+Example 2:
+
+Input: s = "(())"
+Output: 2
+Example 3:
+
+Input: s = "()()"
+Output: 2
+
+
+ #Algorithum made easy
+____________________________________________________________________________________
+class Solution {         // using stack
+    public int scoreOfParentheses(String s) {
+        
+        //step 1:
+        Stack<Integer> st=new Stack<Integer>();
+        int result=0;
+        
+                                                      //step:2 run a for loop if char="(" push 0 to stack else
+        
+        for(char c : s.toCharArray())
+        {   int val=0;
+            if(c == '(') st.push(0);
+            else{
+                                                            // run a while loop  which 0 come you get continues 1 and add them one by one  upto 0
+                while(st.peek() != 0) val+=st.pop();
+                                                           //when we hit 0 we multiply calculated val with 2,and pop() ->0 
+                                                         //if there is no 1 in stack we hit directly 0  then we put remove 0 and put 1 in stack
+                val=Math.max(2*val,1); //()-->1 
+                st.pop();
+                st.push(val);
+            }
+        }
+
+                                                    //At last our stack contain only value add all value in stack give result
+        while(!st.isEmpty())
+        {
+            result+=st.pop();
+        }
+      
+      return result;
+    }
+}
+......................................................................................................
+/* Approch:-
+1.when we get "(" push 0 to stack
+2.when we get ")" 
+ 2.1.we check if there is 0 in peek() of stack pop it and push 1
+  2.2.if we get continue 1 we run a while loop(upto which we get 0) add them and multiply sum * 2 =val and 
+  remove the peek 0 and put calculated value to stack again put to stack 
