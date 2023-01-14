@@ -1,0 +1,127 @@
+Input: s = ")()())"
+Output: 4
+Explanation: The longest valid parentheses substring is "()()"
+
+Input: s = "(()"
+Output: 2
+Explanation: The longest valid parentheses substring is "()".
+
+__________________________________________________________________________________________________________________________________________
+class Solution {   // Best Approch ( Approch 2 Without using stack )   Tc-->O(n ) Sp-->O(1)
+    public int longestValidParentheses(String s) {
+     
+     int open=0,close=0;
+     int max=0;
+
+     //loop 1
+     for(int i=0;i<s.length();i++)
+     {
+         if(s.charAt(i)=='(')
+         {
+            open++;
+         }else{
+             close++;
+         }
+
+         if(open==close){
+             int len=open+close;
+              max=Math.max(max,len);
+         }else if(close>open){
+             open=0;
+             close=0;
+         }
+     }
+
+     //loop 1 
+     open=0;close=0;
+     for(int i=s.length()-1;i>=0;i--)
+     {
+         if(s.charAt(i)=='(')
+         {
+            open++;
+         }else{
+             close++;
+         }
+
+         if(open==close){
+            int len=open+close;
+             max=Math.max(max,len);
+         }else if(close<open){
+             open=0;
+             close=0;
+         }
+     }
+       
+       return max;
+    }
+}
+/*Approch :- 
+1.using two variable open and close ,we run 2 loop  (n-->length of string)
+2.loop1:(0-->n)
+  1.count open and close perenthese 
+  2.if(open ==close) --> length is open +close & clalculate max length on each step
+    if(close>open)->do again open=close=0 
+3. Initialize open = 0,close = 0 again  
+4..loop2:(n-->0)
+  1.count open and close perenthese 
+  2.if(open ==close) --> length is open +close & clalculate max length on each step
+    if(close<open)->do again open=close=0   
+return maximum length
+    */    
+
+
+
+
+
+
+
+
+___________________________________________________________________________________________________________________________________________________
+
+
+class Solution {                                                       // using stack  Approch 1 using stack    Tc-->O(n ) Sp-->O(n)
+    public int longestValidParentheses(String s) {
+
+        Stack<Integer> st=   new  Stack<Integer>();
+        st.push(-1);
+        
+        int max=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i) =='('){
+                st.push(i);
+            }
+            else
+            {
+                st.pop();
+
+                  //if condition
+                if(st.isEmpty()){
+                    st.push(i);
+                }else
+                {
+                  //calculate len
+                   int len=i-st.peek();
+                  max=Math.max(max,len);
+
+                }
+            }
+        }
+       
+       return max;
+    }
+}
+/*Approch 1:- #Algo made easy
+1.create a stack & push -1.
+2.run a loop 0-n
+3 if(curent character-->'(') st.push(index of current)
+4.else  (it is ')')so,
+    4.1  pop(); as it made pair ( )
+    4.2 if condition 
+    if (stack is empty )
+        push(curent index)
+    else 
+        calculate length by
+        [current index - stack top (index) ]
+        and find maximum on each step
+    */    
