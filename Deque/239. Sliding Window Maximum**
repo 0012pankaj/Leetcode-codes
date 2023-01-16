@@ -1,0 +1,68 @@
+Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
+Output: [3,3,5,5,6,7]
+Explanation: 
+Window position                Max
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+_________________________________________________________________________________________________________________
+
+class Solution {   // using sliding window and Deque DS  Tc-->O(n)  Sp-->(k)
+      Deque<Integer> dq=new ArrayDeque<Integer>();
+      
+      int n=nums.length;
+      int[] arr=new int[n-k+1];
+      int x=0;
+
+  //loop 1:
+      for(int i=0;i<k;i++)
+      {    
+          while( !dq.isEmpty() && nums[dq.peekLast()]<= nums[i])
+          {
+              dq.removeLast();
+          }
+          dq.addLast(i);
+      }
+
+      arr[x++]=nums[dq.peekFirst()];
+
+  //loop 2:
+
+     for(int i=k;i<n;i++)
+      {    
+          while( !dq.isEmpty() && dq.peekFirst() <= i-k) 
+          dq.removeFirst();  
+
+
+          while( !dq.isEmpty() && nums[dq.peekLast()] <= nums[i])
+          {
+              dq.removeLast();
+          }
+
+          dq.addLast(i);
+          arr[x++]= nums[dq.peekFirst()];
+      }
+
+
+        return arr;
+    }
+}
+------------------------------------------------------------------------------------------------------------
+// #code with alisha                               
+/*Approch:- using sliding window  And Deque**
+1. we take 1 deque and run 2 loop 
+  loop 1: 0 - k
+    -->we store element one by one if any previous element which is present in deque is smaller then current
+      then remove all of them first and then add current element
+2. after loop 1 it contain largest/maximum at its peekfirst  deque-->  [first.......................................last]    
+
+3.loop 2:k- n
+  --> we check 2 condition with while loop
+        1.if element out of whindow present then remove them all 
+        2.before adding current element check if any previous element which is present in deque is smaller then current
+      then remove all of them first and then add current element   
+ (DONT COFUSE WE USE INDEX TO STORE IN DEQUE INSTEAD OF ELEMENT IT HELP TO REMOVE (i-k)th ELEMENT from deque easily)
