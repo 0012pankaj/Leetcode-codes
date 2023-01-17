@@ -1,0 +1,27 @@
+
+
+____________________________________________________________
+class Solution {
+    static void preOrder(TreeNode root,ArrayList<Integer> L)
+    {
+        if(root == null)
+       {
+           return;
+           
+       }
+                                   //Tc-->O(n)  Sp-->O(n)
+          L.add(root.val);
+        preOrder(root.left,L);
+        preOrder(root.right,L);   
+       
+    }
+
+    public List<Integer> preorderTraversal(TreeNode root) {
+        //------------------ 
+        ArrayList<Integer> L=new ArrayList<Integer>(); 
+        preOrder(root,L);
+        return L;
+    
+        //------------
+    }
+}
