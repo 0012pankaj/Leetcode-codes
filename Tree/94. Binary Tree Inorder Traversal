@@ -1,0 +1,27 @@
+
+class Solution {
+   
+    static void inorder(TreeNode root,ArrayList<Integer> L)
+    {
+        if(root == null)
+       {
+           return;
+           
+       }
+    //Tc-->O(n)  Sp-->O(n) Logic[left root right]
+         
+        inorder(root.left,L);
+         L.add(root.val);
+        inorder(root.right,L);   
+       
+    }
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+        //------------------ 
+        ArrayList<Integer> L=new ArrayList<Integer>(); 
+        inorder(root,L);
+        return L;
+    
+        //------------
+    }
+}
