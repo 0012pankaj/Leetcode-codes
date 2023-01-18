@@ -1,0 +1,46 @@
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+__________________________________________________________________
+
+class Solution {  
+    
+    public void helper(String que , String ans,List<String> list)
+    {   
+        if( que.length()== 0){
+            list.add(ans);
+            return;
+        }
+
+
+         char ch=que.charAt(0);
+         String keypress=key[ch-'1'];
+
+         for(int i=0 ; i<keypress.length(); i++)
+         {
+             helper(que.substring(1),ans + keypress.charAt(i),list);
+         }
+    }
+
+    static String[] key={"","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    List<String> list=new ArrayList<String>();
+
+    public List<String> letterCombinations(String digits) {
+         List<String> list=new ArrayList<String>();
+        if(digits.length()== 0)
+            return  list;
+        else
+          helper(digits,"",list);
+
+        return list;
+    }
+
+}
+____________________________________________________________________
+/*Approch:-using recursion
+1.use an Array of string(key) that contain all the alphabet as given in keypad.
+2.use helper function to pass empty string(ans) with given digit quection.
+3. in helper function
+  i.we extract first  digit and find characters of string present at that number.(keypress).
+  ii. run loop o - no.of char at that digit(size of string kp)
+      call helper function recursively passing next few digit execept first (que) ,emptystring+first char
+  iii. base case when all digit complited in (que)   add to array list return  
