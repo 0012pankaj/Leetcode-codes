@@ -1,0 +1,45 @@
+
+class Solution {
+                              //using Level order treversel and Hashmap
+    public int widthOfBinaryTree(TreeNode root) {
+                                         //create hash map store first head and its index as 0
+        Map<TreeNode,Integer> mp =new HashMap<TreeNode,Integer>();
+        mp.put(root,0);
+    
+        Queue<TreeNode> q=new LinkedList<>();
+        q.add(root);
+        //let max counnt
+        int maxcount=0;
+
+        while(!q.isEmpty())
+        {
+            int count=q.size();
+            int left=mp.get(q.peek());                            //store left  value which is 0
+            
+            
+            for(int i=0;i<count;i++)
+            {
+               TreeNode cur=q.poll();
+               maxcount=Math.max(maxcount,mp.get(cur)-left+1);                           //calculate maxlength ( current value -left +1)
+               
+               if(cur.left!=null)                           // if left node is present then its index is 2*current node index
+               { q.add(cur.left);
+                 mp.put(cur.left,2*mp.get(cur)); }
+               
+               if(cur.right!=null)                      // if right node is present then its index is 2*current node index+1
+               {  q.add(cur.right);
+                  mp.put(cur.right,2*mp.get(cur)+1);  }   
+            }
+            
+        }
+        
+        return maxcount;
+    }
+}
+/*Approch codingdecoder  Tc-->O(n) Sp-->O(n)
+1.we use Hash map to store node and its index/weight
+Idea :we give index to each node 
+root node index is 0 
+root.left node index= 2*root index
+root.right node index=2*root index
+THIS REPEAT AT EACH LEVEL WHERE ROOT BECOME CURRENT*/
