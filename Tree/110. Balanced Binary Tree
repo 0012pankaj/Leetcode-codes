@@ -1,0 +1,23 @@
+
+class Solution {
+
+      public static int helper(TreeNode node)
+    {
+        if(node==null) return 0;
+        
+       int lh=helper(node.left);
+       if(lh==-1 ) return -1;
+       
+       int rh=helper(node.right);
+       if(rh==-1 ) return -1;
+       
+                                              // 1.if any of these height is n0t balanced THEY RETURN -1 
+       if(Math.abs(lh-rh)>1) return -1;          //2.main key ward to check balance
+       
+       return 1+Math.max(lh,rh);
+        
+    }
+    public boolean isBalanced(TreeNode root) {
+       return helper(root)!=-1;
+    }
+}
