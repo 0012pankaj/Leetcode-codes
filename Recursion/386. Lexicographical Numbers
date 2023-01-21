@@ -1,0 +1,50 @@
+class Solution {
+
+    public static void helper(int cur,int n,List<Integer> list)
+    {
+        if(cur > n) return;
+        
+        if(cur!=0){  //for not printiong starting zero
+            list.add(cur);
+        }
+
+        // list.add(cur);
+
+        int i=0;
+        if(cur == 0)
+        {
+            i=1;
+        }
+        for(;i<=9;i++)
+        {
+            helper(10*cur+i,n,list);
+        }
+    }
+
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> list=new ArrayList<Integer>();
+        helper(0,n,list);
+        
+        return list;
+    }
+}
+/*monu bhiya approch  
+1.we try to dro its recursive tree like eg-(0 to 1000)
+               0
+        1   2   3   4 ...9                       
+     for^      
+               1  
+     10  11 12 13 14.....19
+  f0r^        
+               10
+  100  101 102 103 104.......109 
+for^ 
+               100
+  1000 X stop X              
+
+  As we se our tree in starting loop start from 1to9 when current is 0 then 
+  for each level loop is start from 0 to 9 
+  1.so we run a loop from 0 to 9 for every level except for starting level when current is 0
+  2.As we se left view of tree value increasing in(current*10+i) 
+  3.Base case stop/return when current is out of range > n (here n-->1000)
+  */
