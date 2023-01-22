@@ -1,0 +1,30 @@
+
+class Solution {
+    TreeNode prev=null;
+                                                                              //preorder-->[left right root]
+
+    public void flatten(TreeNode root) {
+
+                                                                                //base case
+        if(root==null) return;
+                                                                        //we store root's left and root's right in temp and flatten them first
+        TreeNode templeft=root.left; 
+        TreeNode tempright=root.right;
+                                                                               //recursive call
+         flatten(templeft);
+         flatten(tempright);
+                                                                          //made roots left null and add left flatten tree to root's right
+         root.left=null;
+         root.right=templeft;
+      
+                                                                          //reach at end of currnt (leftflatten tree)and add right falleten tree
+        TreeNode curr=root;
+       while(curr.right !=null){
+           curr=curr.right;
+       }
+       curr.right=tempright;
+       
+    }
+}
+
+//tc-->O(n) Sp-->O(H)  #Algo made easy
