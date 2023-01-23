@@ -37,5 +37,5 @@ Approch:
 1.create a map that contain inorder value with thare index
 2.every element of preorder give root value (we treverse through preorder using indexdiclare globaly) and 
 we find that root ' position value in inorder array /hash
-all the left element of position is element of subtree of left and
+all the left element of position is element of subtree of left and 
 all the right elements of position is element of subtree of right.   Tc-->O(N) sp-->O(N)  Best approch   #love bubber
