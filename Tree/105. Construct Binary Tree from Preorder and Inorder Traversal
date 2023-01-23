@@ -1,0 +1,41 @@
+                                                           //Tc-->O(N) sp-->O(N)  Best approch
+class Solution { 
+   
+    int index = 0;
+    Map<Integer, Integer> map = new HashMap<>();
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+    
+        TreeNode root=helper(preorder, 0, preorder.length - 1);
+
+        return root;
+    }
+
+    private TreeNode helper(int[] preorder, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+
+        int rootValue = preorder[index++];
+        TreeNode root = new TreeNode(rootValue);
+
+        int position=map.get(rootValue);
+        root.left = helper(preorder, left, position - 1);
+        root.right = helper(preorder,position + 1, right);
+
+        return root;
+    }
+}
+
+/* logic: we find root value in preorder array and its left sub element amnd right sub element in 
+Inorder array
+Approch: 
+1.create a map that contain inorder value with thare index
+2.every element of preorder give root value (we treverse through preorder using indexdiclare globaly) and 
+we find that root ' position value in inorder array /hash
+all the left element of position is element of subtree of left and
+all the right elements of position is element of subtree of right.   Tc-->O(N) sp-->O(N)  Best approch   #love bubber
