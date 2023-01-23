@@ -1,0 +1,59 @@
+
+class Solution {
+
+    public static void callzigzag(TreeNode root,List<List<Integer>> list)
+    {    if(root==null) return;
+  
+        Stack<TreeNode> s1 =new Stack<TreeNode>();
+        Stack<TreeNode> s2 =new Stack<TreeNode>();
+        s1.push(root);
+
+        while(!s1.isEmpty() || !s2.isEmpty() )
+        {
+            List<Integer> l1=new ArrayList<>();
+            while(!s1.isEmpty())
+            {   
+                TreeNode node=s1.pop();
+                if(node.left != null) s2.push(node.left);
+                if(node.right!= null) s2.push(node.right);
+                l1.add(node.val);
+            }
+            list.add(l1);
+
+            if(!s1.isEmpty()==false && !s2.isEmpty()==false){   //important to give this condition
+                break;}
+         
+           List<Integer> l2=new ArrayList<>();
+              while(!s2.isEmpty())
+            {   
+                TreeNode node=s2.pop();
+                if(node.right!= null) s1.push(node.right);
+                if(node.left!=null) s1.push(node.left);
+               
+                l2.add(node.val);
+            }
+
+                list.add(l2);
+    
+        }
+
+   
+    }
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> list =new ArrayList<>();
+
+        callzigzag(root,list);
+        return list;
+        
+    }
+}
+/* Algorithum:-
+1.Push the root to the stack s1
+2.While any of the two stacks is not empty
+    2.1, While s1 is not empty
+             a, Take out a node and add it in inner list
+              b. Push children of the taken out node into s2
+    2.2,While s2 is not empty
+               a. Take out a node and add it in inner list
+               b. Push children of the taken out node into s1 in reverse order
+              i.e from right to left */
