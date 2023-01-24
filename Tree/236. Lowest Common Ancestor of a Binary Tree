@@ -1,0 +1,27 @@
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        if(root == null) return null;
+
+        if(root == p || root == q) return root;
+
+        TreeNode lca_left= lowestCommonAncestor(root.left,p,q);
+        TreeNode lca_right= lowestCommonAncestor(root.right,p,q);
+
+        if(lca_left != null && lca_right != null)
+        return root;
+
+        if(lca_left !=null)
+         return lca_left;
+        else 
+        return lca_right;
+        
+    }
+}
+/*Approch:-
+we follow following steps:-
+1.if current node is same as p and q than that is LCA.
+2.if any one of its subtree contain the p and other contain q than curent is LCA
+3.if any one of its subtree contain the p or q than curent is LCA
+4.if none of its subtree contain any of p and q.
