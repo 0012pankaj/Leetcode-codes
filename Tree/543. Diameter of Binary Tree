@@ -1,0 +1,35 @@
+Given the root of a binary tree, return the length of the diameter of the tree.
+
+The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+
+The length of a path between two nodes is represented by the number of edges between them.
+
+ ____________________________________________________________________________________________-
+class Solution {   //use concept of max height 
+     int  diameter=0;
+
+     public  int  findhight(TreeNode root){
+          if(root==null) return 0;
+
+         int lh=findhight(root.left);
+         int rh=findhight(root.right);
+
+         diameter=Math.max(diameter,lh+rh); //extar line than max hight which help us to calculate diameter
+
+         return 1+Math.max(lh,rh);
+
+     }
+    public int diameterOfBinaryTree(TreeNode root) {
+       
+       findhight(root);
+
+       return diameter;
+    }
+
+}
+_________________________________________________________________________________________________---
+/*Approch:- O(n) 
+we follow the idea of max hight code
+1.we find maximum height at every node 
+2. on other side i compare sum of (left max height and right max hight )at each node and find maximum sum 
+which is our actual diameter*/
