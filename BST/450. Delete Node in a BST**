@@ -1,0 +1,53 @@
+Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
+
+Basically, the deletion can be divided into two stages:
+
+Search for a node to remove.
+If the node is found, delete the node.
+_________________________________________________________________________________
+class Solution { 
+      public  int minval(TreeNode root)
+     {
+         TreeNode curr=root.left;
+         int minvalu=root.val;
+         while(curr!=null)
+         {
+             minvalu=curr.val;
+             curr=curr.left;
+         }
+         
+         return minvalu;
+     }
+
+    public TreeNode deleteNode(TreeNode root, int x) {
+    
+     
+     if(root==null) return root;
+     
+     if(root.val>x) 
+     root.left=deleteNode(root.left , x);
+     else if(root.val <x)
+     root.right=deleteNode(root.right , x);
+     else
+     {
+         if(root.left == null) return root.right;
+         if(root.right == null ) return root.left;
+         
+         root.val=minval(root.right);
+         
+         root.right=deleteNode(root.right , root.val);
+     }
+     
+     return root;
+    }
+}
+
+/*Approch:-
+.we first search value if match we folow three steps:
+1.check if itd left is null then return right.
+2.check if itd right is null then return left.
+3.**if(its both left and right are not null) then.
+   i.we replace the value of current node(which need to delet) with
+    its nearest minimum value which is found in its right's subtree's
+    left view last node.
+  ii. after replacing value we we delet that last node. #anuj
