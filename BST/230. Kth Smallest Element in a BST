@@ -1,0 +1,31 @@
+
+class Solution {  //Idea: using Inorder Traversal ase it give data in sorted order
+    int count=0;   //[left root right]
+    int ans=0;
+
+    public void helper(TreeNode root,int k)
+    {     
+        if(root==null) return;
+       
+        kthSmallest( root.left,  k);  //left
+        
+        count++; //root
+        if(count == k){
+         ans=root.val;
+         return ;
+        }
+         kthSmallest( root.right,  k);//right
+    
+
+    }
+    
+    public int kthSmallest(TreeNode root, int k) {
+
+        helper(root,k); //take helper function help
+        return ans;
+    }
+}
+
+
+//Tc-->O(n)
+sp-->O(n) but if we use morrish treversal insted of this that use while loop sp-->O(1)
