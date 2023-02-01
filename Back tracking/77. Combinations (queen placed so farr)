@@ -1,0 +1,39 @@
+lass Solution {  //queen placed
+    public static void helper(boolean[] board,int totalq,int qplaced,int idx,List<Integer>list ,List<List<Integer>> ans)
+    {
+        if(totalq==qplaced)
+        {
+            ans.add(new ArrayList<>(list));
+
+        }
+
+        for(int i=idx;i<board.length;i++)
+        {
+            if(board[i]==false)                           //queen placed nhi h
+            {
+                board[i]=true;                           //queen placed krdi
+                list.add(i+1);
+                helper(board,totalq,qplaced+1,i+1,list,ans);
+                list.remove(list.size()-1);
+                board[i]=false;                          //backtarack  to use for other's' call
+
+            }
+        }
+    }
+
+
+
+    public List<List<Integer>> combine(int n, int k) {
+        
+        boolean board[]=new boolean[n];
+        int no_of_q=k;                                             //no. of queen
+
+        List<List<Integer>> ans=new ArrayList<>();
+         List<Integer> list=new ArrayList<>();
+
+        helper(board,no_of_q,0,0,list,ans);
+
+         return ans;
+    }
+}
+Console
