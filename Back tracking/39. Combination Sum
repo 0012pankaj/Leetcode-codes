@@ -1,0 +1,32 @@
+class Solution {
+  
+    public static void helper(int[] can, int target,  List<Integer> list,int idx, List<List<Integer>> ans)
+    {      //base case
+           if(target == 0 ) 
+           {   ans.add(new ArrayList<Integer>(list));  //point to remember -->Always return list in list using new location 
+                                                      // other wise it give empty list of list, as we  are removing the item after recursion 
+                   return;                                //call that remove the element from same location so we use new location to store and send
+           }                                      
+         
+        
+        for(int i=idx ;i<can.length;i++)
+        { 
+             if(target >= can[i]) {
+                 list.add(can[i]);                          //due to this we do back tracking so right opp statment after call
+                 helper(can,target-can[i],list,i,ans);
+                 list.remove(list.size()-1);               //remove the lst element which we add
+             }
+        } 
+       
+    }
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+     
+    List<List<Integer>> ans=new ArrayList<>();
+    List<Integer> list=new ArrayList<Integer>();
+
+
+     helper(candidates,target,list,0,ans);       
+      return ans;  
+    }
+}
