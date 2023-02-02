@@ -1,0 +1,43 @@
+class Solution { 
+    public boolean ispalindrom(String str)
+    {
+        int i=0;
+        int j=str.length()-1;
+        while(i<=j)
+        {
+            if(str.charAt(i)!=str.charAt(j)) return false;
+            i++;
+            j--;
+        }
+
+        return  true;
+    }
+
+     public void helper(String s,List<String> list,List<List<String>> ans)
+     {   //base case
+        if(s.length()==0)
+        {   ans.add(new ArrayList<String>(list));
+            return;
+        }
+
+         for(int i=1;i<=s.length();i++)
+         {
+             String st=s.substring(0,i);
+             if(ispalindrom(st))
+             {
+                 list.add(st);
+                 helper(s.substring(i),list,ans);
+                 list.remove(list.size()-1);
+             }
+         }
+     }
+
+    public List<List<String>> partition(String s) {
+        List<List<String>> ans=new ArrayList<>();
+        List<String> list=new ArrayList<>();
+        
+        helper(s,list,ans);
+
+        return ans;
+    }
+}
