@@ -1,0 +1,31 @@
+class Solution {
+     public void Swap(int nums[],int s,int l){
+      
+            int temp=nums[s];
+           nums[s]=nums[l];
+            nums[l]=temp;
+      
+    }
+      public void  reverse( int[] nums,int i,int j){
+         while(i<j) Swap(nums,i++ ,j--);
+     }
+    
+    public void nextPermutation(int[] nums) {
+        if(nums == null  || nums.length<=1)return ;
+        int i=nums.length-2;
+        while(i >=0 && nums[i]>=nums[i+1]) i--;
+        if(i >= 0){
+            int j=nums.length-1;
+            while(nums[j]<=nums[i]) j--;
+            Swap(nums,i,j);
+        }
+        
+        reverse(nums,i+1,nums.length-1);
+     
+    }
+}
+/* Approch:-
+1.find last find value v[x]  where ,v[x] < v[x+1]
+2.from last fint v[y] where v[y]>v[x]
+3.swap v[y] v[x] ;
+4.revetrse (x+1,len-1)
