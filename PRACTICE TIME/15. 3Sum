@@ -1,0 +1,40 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        //  List<List<Integer>> result =new ArrayList<>();
+        HashSet<List<Integer>> result =new HashSet<>();   //best time is come when not use hashset 
+         
+         for(int i=0;i<nums.length-2;i++){
+        //  {   if(i==0 ||(i>0 &&nums[i] !=nums[i-1]))
+        //      {
+             int tar=0-nums[i];
+             int s=i+1;
+             int e=nums.length-1;
+
+             while(s<e)
+             {   
+                 if(nums[s]+nums[e]==tar)
+                 {   
+                     List<Integer> ans=new ArrayList<>();
+                     ans.add(nums[i]);  ans.add(nums[s]);  ans.add(nums[e]); 
+                     result.add(ans);
+                    //  while(s<e && nums[s]==nums[s+1])s++;
+                    //  while(s<e && nums[e]==nums[e-1])e--;
+                     s++;
+                     e--;
+                 }
+                else if(nums[s]+nums[e] > tar){
+                   e--;
+                }else{
+                   s++;
+                }           
+                
+             }
+        //  }
+         }
+
+        //  return result;
+        return new ArrayList(result);
+
+    }
+}
