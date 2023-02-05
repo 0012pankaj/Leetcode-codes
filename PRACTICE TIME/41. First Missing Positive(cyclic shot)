@@ -1,0 +1,31 @@
+class Solution {
+    //apply cyclic shot Hint:try tu understand pattern, runs in O(n) time and uses constant extra space.
+                                          
+  public int firstMissingPositive(int arr[]){
+      int n=arr.length;
+      //sorting--------------------
+      int i=0;
+     while(i<n)
+    { int c_i=arr[i]-1;  //c_i-->correct index  
+      if(arr[i]>0 && arr[i]<=n && arr[i]!=arr[c_i] ) // if not on corect index arr[i]!=arr[c_i] swap with cpositin
+      { 
+          int temp=arr[i];          //at the time of shorting ignore -ve values and value greater than n
+          arr[i]=arr[c_i];
+          arr[c_i]=temp;
+      }else{
+          i++;
+      }
+        
+    }
+  //chech if value is not on its right index given-[1 2 0] after cyclic sort [0 1 2] ,first mising positiv is 3
+    for(int j=0;j<n;j++)
+    {                                          
+        if(arr[j]!=j+1 ){
+           return j+1; 
+           
+        }
+    }
+    
+    return n+1;
+    }
+}
