@@ -1,0 +1,26 @@
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        int left_height[]=new int[n];  //array preprocessing
+        int right_height[]=new int[n];
+        
+        left_height[0]=height[0];
+        for(int i=1 ; i<n ;i++)
+        {
+            left_height[i]=Math.max(height[i],left_height[i-1]); // array of highest from left
+       }
+        
+         right_height[n-1]=height[n-1];
+        for(int i=n-2 ;i>=0;i--)
+        {
+             right_height[i]=Math.max(height[i],right_height[i+1]);  //array of highest from lright
+        }
+        int res=0;
+        for(int i=0;i<n;i++)    //  minimum hight of left and right array subtractheigt of that block
+        {
+          res+=(Math.min(left_height[i],right_height[i])-height[i]);  
+        }
+        
+     return res;   
+    }
+}
