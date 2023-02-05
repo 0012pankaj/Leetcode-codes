@@ -1,0 +1,40 @@
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        
+        int ans=0;
+        int sum=0;
+        int rem=0;
+        HashMap<Integer,Integer> mp=new HashMap<>();
+        mp.put(0,1); //extra case  if sum % k == 0, can be add directly, but other need at lease two
+        for(int i=0;i<nums.length;i++)
+        {    sum+=nums[i];
+            rem=(sum)%k;
+
+            if(rem < 0){     //handel negative rem
+              rem =rem+ k;
+            }
+           
+
+            if(mp.containsKey(rem))
+            {
+                ans+=mp.get(rem);
+                mp.put(rem,mp.get(rem)+1);
+            }
+            else{
+             mp.put(rem,1);
+            }
+          
+
+        }
+
+
+        return ans;
+    }
+}
+/*Approch :- 
+we  use a map to store count of remender after each sum if same remainder is come again
+and our answer will be sum of (pair of remeinder )
+1.we do sum one by one
+2.find remainder at each sum
+3.store the frequency of remainder
+4#Ans is sum of all frequency greater than 1( pair of two remainder made one subarray)
