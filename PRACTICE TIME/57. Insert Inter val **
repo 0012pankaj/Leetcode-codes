@@ -1,0 +1,33 @@
+Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+Output: [[1,2],[3,10],[12,16]]
+Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+______________________________________________________
+
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        //we use arraylist to store at last we conver into array
+
+        ArrayList<int[]> result=new ArrayList<>();    //inarr[x][y]    newIntervals[a][b]
+        for(int[] inarr: intervals)
+        { 
+            if(inarr[1]<newInterval[0]) result.add(inarr);   //if y < a 
+            else if(inarr[0]>newInterval[1])   //if x > b 
+            {
+               result.add(newInterval);  
+               newInterval=inarr;  
+            }
+            else
+            {                 //overlapping 
+                newInterval[0]=Math.min(inarr[0],newInterval[0]);
+                newInterval[1]=Math.max(inarr[1],newInterval[1]);
+            }
+
+        }
+        result.add(newInterval); 
+
+           //convert
+        return result.toArray(new int[result.size()][]);
+        
+    }
+}
+/* to understabd first dry run with ex 2 u easily understand */
