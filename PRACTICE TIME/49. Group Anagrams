@@ -1,0 +1,20 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> m =new  HashMap<String,List<String>>();
+        for(String s:strs)
+        {                                     //use map to store strings sorted string as key and value as a arraylist contain string match to key
+            
+            char[] ca=s.toCharArray();   //convert each string to arr and then sort
+            Arrays.sort(ca);
+            String stkey=new String(ca);  // convert sorted arr into string 
+            
+            if(!m.containsKey(stkey))   // if not present in map then put in map
+            {
+                m.put(stkey,new ArrayList<>());
+            }
+            m.get(stkey).add(s);   // add string as value where it match to perfect key
+            
+        }
+        return new ArrayList<>(m.values()); //return array list having all values of map 
+    }
+}
