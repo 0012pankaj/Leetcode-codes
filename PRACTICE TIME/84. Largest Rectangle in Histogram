@@ -1,0 +1,58 @@
+class Solution {   //Using MNOTONIC STACK  left and right pattern   [MONOTONIC STACK COCEPT]
+    public int largestRectangleArea(int[] a) {
+     
+     int n=a.length;
+     int left[]=new int[n];
+     int right[]=new int[n];                              //given[2,1,5,6,2,3] n=6 =>indexis  -1[0,1,2,3,4,5]6
+
+     Stack<Integer> s=new Stack<>();
+
+     // step 1: find array of left smallest element  of each element and store index (indexes) [-1,-1,1,2,1,4]
+       
+       s.push(0);
+       left[0]=-1;
+
+       for(int i=1;i<n;i++)
+       {
+           while(!s.isEmpty() && a[s.peek()] >= a[i])
+           {
+              s.pop();
+           }
+
+           left[i]=(s.isEmpty() ? -1 : s.peek()) ;
+
+           s.push(i);
+       }
+     s.clear();
+     //step 2: find array of right smallest element  of each element and store index (indexes) [1,6,4,4,6,6]
+
+     
+       s.push(n-1);
+       right[n-1]=n;
+
+       for(int i=n-2;i>=0;i--)
+       {
+           while(!s.isEmpty() && a[s.peek()] >= a[i])
+           {
+              s.pop();
+           }
+
+           right[i]=(s.isEmpty() ? n : s.peek()) ;
+
+           s.push(i);
+       }
+
+     // step 3: calculate area of histogram and find maximum out of them   each( length = a[] ) and (width= right[]-left[]-1)
+    int max_area=0;
+    for(int i=0;i<n;i++)
+        {
+            int width=right[i]-left[i]-1;                    //FIDING WIDTH-->(index of right smallest -index of ledt smallest -1)
+            max_area=Math.max(max_area,a[i]*width);          //MAXIMUM AREA
+        }
+        return max_area;
+        
+    }
+}
+
+//question is baised on Q:NEXT GREATEST/SMALLEST IN ARRAY  [MONOTONIC STACK COCEPT]
+//Q: STOCK SPAN PROBLEM  
