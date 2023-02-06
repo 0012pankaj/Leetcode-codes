@@ -1,0 +1,28 @@
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+_________________________________________________________
+
+
+
+//.approch:-----------------Sliding window     
+        int ans = 0;
+        int ei = 0;
+        int si = 0;
+        int[] arr = new int[128];
+        while(ei<s.length()){
+            //grow
+            arr[s.charAt(ei)]++;
+            //shrink
+            while(arr[s.charAt(ei)]>1){
+                arr[s.charAt(si)]--;
+                si++;
+            }
+            //ans calculate
+            ans = Math.max(ans,ei-si+1);
+            ei++;
+        }
+        return ans;
+    }
+}   //TC-->O(n) sp-->O(1);
