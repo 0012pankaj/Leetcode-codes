@@ -1,0 +1,82 @@
+class Solution {         //in this we only need to countnod do display work
+     static int count=0;
+    public int totalNQueens(int n) {
+        
+    boolean[][] board=new boolean[n][n];
+    count=0;
+    helper(board,0,n);  
+    
+    return count;
+    
+    }
+
+
+    //step1:---------------------(backtracking)
+    //start from top corner move column wise if we put one in row then move to next row
+    
+    public static void helper(boolean[][] board , int row ,int tq  )
+    {    
+         if(tq==0){  
+           //it men all queen are places correctly so count increment
+          count++;
+          return;
+         }
+
+        if(row==board.length) return;
+        
+
+        for(int col=0; col<board[0].length;col++)
+        {  
+            if(ispossible(board,row,col))
+            {      //main logic 3 line 
+                board[row][col]=true;
+                helper(board,row+1,tq-1);   //row+1  move to next row
+                board[row][col]=false;//backtrack
+             }
+
+        }
+    }
+                  //step 2:-----------------------(condition for positioning)
+
+    public static boolean ispossible(boolean[][] board,int row,int col)
+    {
+        //we need to handel only three cases uper left digonal and right digonal
+        //1.upper
+        
+        int r=row;
+        while(r>=0){ 
+            if(board[r][col]==true){
+                return false;
+            }
+            r--;
+        }
+
+         //2.left digonal
+         
+        int r1=row;
+        int c1=col;
+        while(r1>=0 && c1>=0){ 
+            if(board[r1][c1]==true){
+                return false;
+            }
+            r1--;
+            c1--;
+        }
+
+         //3.left digonal
+        int r2=row;
+        int c2=col;
+        while(r2>=0 && c2<board[0].length){ 
+            if(board[r2][c2]==true){
+                return false;
+            }
+            r2--;
+            c2++;
+        }
+
+
+        return true;
+    }
+    
+    
+}
