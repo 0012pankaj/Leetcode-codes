@@ -1,0 +1,95 @@
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+    List<List<String>> ans=new ArrayList<>();
+
+    boolean[][] board=new boolean[n][n];
+    helper(board,0,n,ans);   
+     return ans;
+
+    }
+
+    //step1:---------------------(backtracking)
+    //start from top corner move column wise if we put one in row then move to next row
+    
+    public static void helper(boolean[][] board , int row ,int tq ,List<List<String>> ans )
+    {    
+         if(tq==0){
+         display(board,ans);   
+          return;
+         }
+        if(row==board.length) return;
+        
+
+        for(int col=0; col<board[0].length;col++)
+        {  
+            if(ispossible(board,row,col))
+            {      //main logic 3 line 
+                board[row][col]=true;
+                helper(board,row+1,tq-1,ans);   //row+1  move to next row
+                board[row][col]=false;//backtrack
+             }
+
+        }
+    }
+                  //step 2:-----------------------(condition for positioning)
+
+    public static boolean ispossible(boolean[][] board,int row,int col)
+    {
+        //we need to handel only three cases uper left digonal and right digonal
+        //1.upper
+        
+        int r=row;
+        while(r>=0){ 
+            if(board[r][col]==true){
+                return false;
+            }
+            r--;
+        }
+
+         //2.left digonal
+         
+        int r1=row;
+        int c1=col;
+        while(r1>=0 && c1>=0){ 
+            if(board[r1][c1]==true){
+                return false;
+            }
+            r1--;
+            c1--;
+        }
+
+         //3.left digonal
+        int r2=row;
+        int c2=col;
+        while(r2>=0 && c2<board[0].length){ 
+            if(board[r2][c2]==true){
+                return false;
+            }
+            r2--;
+            c2++;
+        }
+
+
+        return true;
+    }
+    
+    //step3:---------------------------(display the matrix)
+    public static void display(boolean[][] board,List<List<String>> ans){
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<board.length;i++){
+            String str="";
+            for(int j=0;j<board.length;j++){
+                if(board[i][j]==true){
+                  str+='Q';
+                }else{
+                    str+='.';
+                }
+
+            }
+            list.add(str);
+
+        }
+
+        ans.add(list);
+    }
+}
