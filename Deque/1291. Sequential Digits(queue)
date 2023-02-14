@@ -1,0 +1,37 @@
+class Solution { //using BFS using Queue DSA #best approch
+
+    public List<Integer> sequentialDigits(int low, int high) {
+        Queue<Integer> q=new LinkedList<>();
+        List<Integer> list=new ArrayList<>();
+        for(int i=1;i<10;i++) //pus  1 to 9 in qeue
+        {
+            q.add(i);
+        }
+
+        //Bfs
+       int num=1;
+        while(!q.isEmpty())
+        {
+           num=q.remove();
+           if(num>=low && num <= high){  //acc to condition add in list
+               list.add(num);
+           }
+           if(num>high) break;
+
+           int rem= num%10;
+                                     //pushing next value in qeue
+           if(rem < 9){
+             int nextnum = num*10 + (rem+1) ;
+             q.add(nextnum);
+           }
+        }
+         
+         return list;
+    }
+}
+/* Approch:-code with alisha
+--> we use bfs aproch 
+1.first fill 1 to 9 in qeue
+2.one bay remove first num and check its eligibal to put in list or not and put if
+3.to stop while loop if we get num greater than range.
+4.to add next value we use first value like--> num=1 to push 12  [nextnum = num*10 + (rem+1) ]
