@@ -1,0 +1,36 @@
+class Solution {
+    public String getPermutation(int n, int k) {
+                                                                      // stringBuilder for appending 
+        StringBuilder str=new StringBuilder();
+                                                                 //Arraylist to storenumber up to 1 to n
+        ArrayList<Integer> list=new ArrayList<>();
+
+        int fact=1;                                                     //to calculate factorial of n and hel us to find factorial of every (n-1) value.
+        for(int i=1;i<=n;i++)
+        {    
+            fact *= i ;
+            list.add(i);
+        }
+
+        k--;                                                                             //as we start from 0
+
+        for(int i=0;i<n;i++)
+        {
+            fact /= (n-i) ;                                                           //this gives us factorial of every time n-1
+                                                                                       //formula 1:calculate index  [index = k/(n-1)!]
+            int index=(k/fact) ;
+            str.append(list.remove(index)); 
+                                                                                       //formula 2:calculate K value for next geting next index[k=k%(n-1)!]
+            k%=fact;   
+        }
+        
+        return str.toString();
+    }
+}
+
+/* Approch :- #The code mate
+we store all the number upt n in arrayList
+wsing two formula
+1.for index of num in list
+2.k value to calculate next num index in list
+3.run a loop and fetch value from list using these formulas and create our Kth permutation
