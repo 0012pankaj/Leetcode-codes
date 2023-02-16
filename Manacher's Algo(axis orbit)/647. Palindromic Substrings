@@ -1,0 +1,30 @@
+class Solution {  //using Manacher's Algo of odd and even 
+    public int countSubstrings(String s) { //tc-->O(n^2)
+         int totalcount=0;
+        for(int i=0;i<s.length();i++)
+        {                          //odd  aba         //even  abba
+            totalcount += cal_palindrom(s,i,i) + cal_palindrom(s,i,i+1) ;
+        } 
+
+        return totalcount;      
+    }
+
+    public static int cal_palindrom(String s,int left ,int right)
+    {
+        int count=0;
+        while(left>=0 && right < s.length() && s.charAt(left) == s.charAt(right))
+        {
+           count++;
+
+           left--;
+           right++;
+
+        }
+
+        return count;
+    }
+}
+/* using Manacher Algo #coder decoding
+In this algo we go through each index in first loop and every element treated as axia
+and ther we chexk its left and right side if value match then increase count..so ging left and right  make an orbit.so for hint we call its as (axis/orbit Algo)
+for odd like( aba )we use [i,i] but for even strings [i,i+1]  like (abba )
