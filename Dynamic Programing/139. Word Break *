@@ -1,0 +1,46 @@
+class Solution {  //using Dp  memoization ,Recursive Approch give tle at 35 testcase
+ 
+   HashMap<String,Boolean> map=new HashMap<>();   //step1.dp
+    public boolean wordBreak(String s, List<String> wordDict) {
+       
+       if(wordDict.contains(s)) return true;
+   
+       if(map.containsKey(s)) return map.get(s);    //step 3. dp
+
+       for(int i=0;i<s.length();i++)
+       {
+           String prifix=s.substring(0,i+1);
+           String sufix=s.substring(i+1);
+           if( wordDict.contains(prifix) && wordBreak(sufix,wordDict))
+           {   
+               map.put(s,true);//step2.1dp
+               return true;
+             
+           }
+       } 
+   
+      map.put(s,false);//step2.2dp
+     return false;
+    }
+}
+_______________________________________________________________________________________
+
+/* recursive approch give TLE 
+public boolean wordBreak(String s, List<String> wordDict) {
+       
+       if(wordDict.contains(s)) return true;
+
+       for(int i=0;i<s.length();i++)
+       {
+           String prifix=s.substring(0,i+1);
+           String sufix=s.substring(i+1);
+           if( wordDict.contains(prifix) && wordBreak(sufix,wordDict))
+           {
+               return true;
+           }
+       } 
+   
+
+     return false;
+    }
+    */
