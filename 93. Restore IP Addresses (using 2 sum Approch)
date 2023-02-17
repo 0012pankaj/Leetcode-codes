@@ -1,0 +1,46 @@
+class Solution { //Using 2sum approch  easy to understand compare to bactracking
+    public List<String> restoreIpAddresses(String s) {
+        int Len=s.length();
+    List<String> res= new ArrayList<>();
+    StringBuffer ip=new StringBuffer();   //A.B.C.D
+     
+     //ass 255 contains length 3
+    for(int aLen=1;aLen<=3;aLen++){
+          for(int bLen=1;bLen<=3;bLen++){
+              for(int cLen=1;cLen<=3;cLen++){
+                 
+                 int dLen=Len-aLen-bLen-cLen;
+                   
+                   //check size of d string 
+                 if(dLen>0 && dLen<=3 && dLen+aLen+bLen+cLen == Len)
+                 {    //extract A B C D into integer
+                      int A=Integer.parseInt(s.substring(0,aLen));
+                      int B=Integer.parseInt(s.substring(aLen,aLen+bLen));
+                      int C=Integer.parseInt(s.substring(aLen+bLen,aLen+bLen+cLen));
+                      int D=Integer.parseInt(s.substring(aLen+bLen+cLen,Len));
+                       
+                       //Add All value of part A.B.C.D in string with in checking limit<=255
+                       if(A<=255 && B<=255 && C<=255 && D<=255)
+                          ip.append(A).append(".").append(B).append(".").append(C).append(".").append(D);
+                       
+                       //checking extra zeros on starting and Add in ans the string
+                       if(ip.length()== Len+3){
+                           res.add(ip.toString());
+                       }
+
+                       ip=new StringBuffer(); //empty for new Ip
+                 }  
+
+            }
+        }
+    }
+
+        return res;
+    }
+}
+/*#coder decode Approch: using idea of 2 Sum
+logic:  we start From A to D
+consider minimum Character in A to c 
+And calculate Last D length size 
+if size satisfied then check other condition
+*/
