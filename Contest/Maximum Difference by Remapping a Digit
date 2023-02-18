@@ -1,0 +1,28 @@
+class Solution {
+    public int minMaxDifference(int num) {
+        String str=String.valueOf(num);
+        String mx="";
+         char c=str.charAt(0);
+        char c1=str.charAt(0);
+        for(int i=0;i<str.length();i++)
+        {
+            if(str.charAt(i)!= '9'){
+              c=str.charAt(i);
+                break;
+            }
+        }
+        
+           mx=str.replaceAll(""+c,"9");
+        
+        int a=Integer.parseInt(mx);
+        
+        String mi=str.replaceAll(""+c1,"0");
+        int b=Integer.parseInt(mi);
+        
+        int result=a-b;
+        
+        
+        return result;
+        
+    }
+}
