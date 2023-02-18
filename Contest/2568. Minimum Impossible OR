@@ -1,0 +1,28 @@
+class Solution {
+    public int minImpossibleOR(int[] nums) {
+      HashSet<Integer> set=new HashSet<>();
+        
+        for(int i=0;i<nums.length;i++){
+            int num=nums[i];
+            
+            set.add(num);
+        }
+        
+        int a=1;
+        while(true){
+            if(!set.contains(a)){
+                return a;
+            }
+            a=a*2;
+        }
+    }
+}
+/*
+We can see that, the number is possible if all 2's power lower to it present then its possible.
+
+1,2 present then 1- 3 any number possible
+1,2,4 present then 1 - 7 any number can be possible
+1,2,4,8 present then 1-15 any number can be possible
+
+In other word only 2's power are not possible to form unless it is present in the array.
+So we look for the smallest 2's power that is not present in the array, ans return it as answer.*/
