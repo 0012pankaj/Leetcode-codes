@@ -1,0 +1,37 @@
+class Solution {
+    public List<Integer> grayCode(int n) {
+        List<Integer> res=new ArrayList<>();
+        res.add(0);
+  
+       //if n>0
+       
+        for(int i=0;i<n;i++){
+            int valtoadd=1<<i; 
+            for(int j=res.size()-1;j>=0;--j){
+                res.add(res.get(j)+valtoadd);
+            }
+        }
+
+
+        return res;
+        
+    }
+}
+/* Approch :-
+Using bitMainupulation 
+we put 0 in list initially
+and if n=0 return .
+1.if n=1 :-
+list-->[0]
+we add 1<<0 ==> 1 to lat element of list which is 0 therefor 0+1=1 and add 1 to list
+list become [0,1] and return for n=1.
+
+2. if n=2 :-
+As we calculated for n=1 same as ubove see what next
+at i=1 1<<1 is valtoadd which is (10) so we reversely add (10) in currentlist elements which contain [0,1]
+we get[0,1,11,10] RESULT
+
+3. if n=3 :-
+As we calculated for n=2 same as ubove see what next
+at i=2 1<<2 is valtoadd which is (100) so we reversely add (100) in currentlist elements  which contain [0,1,11,10]
+we get[0,1,11,10,100,101,111,110] RESULT   */
