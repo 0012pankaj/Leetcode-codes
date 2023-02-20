@@ -1,0 +1,37 @@
+ class Solution {   // Approch-using binary serch O(log(n)) and formula [sum k element=k(k+1)/2]
+
+    public int arrangeCoins(int n) {
+     
+       long left=0;
+       long right=n,mid=0,k=0;
+       while(left<=right)
+       {
+           mid=left+(right-left)/2;
+
+            k=mid*(mid+1)/2;
+
+           if(k==n) return (int)mid;
+
+           if(k<n) 
+             left=mid+1;
+           else
+             right=mid-1;
+       }
+       
+       return (int)right;
+    }
+}
+
+/* 
+class Solution {   //first Approch
+    public int arrangeCoins(int n) {
+        int x=1;
+        while(n>=x)
+        { 
+            n=n-x;
+            x++;
+
+        }
+      return x-1;
+    }
+}#Algo made easy*/
