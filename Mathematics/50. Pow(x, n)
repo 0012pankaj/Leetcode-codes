@@ -14,3 +14,14 @@ class Solution {   //using bitwise // best approch   o(log(n))
         return n>=0 ? result :1/result;
     }
 }
+
+_________________________________________________Using recursion Approch fit itt acc to leetcode
+public static int power(int a,int n){
+   int ans=puwer(a,n/2);
+     ans=ans*ans;   //n/2+n/2=n  a^8=a^4+a^4;
+      if(n%2!=0){  //for odd power a^9=a^4+a^4 +a;
+       ans=ans*a;
+      }
+
+     return ans;
+}
