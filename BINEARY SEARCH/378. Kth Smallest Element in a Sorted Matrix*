@@ -1,0 +1,42 @@
+class Solution { //Use binearySearch and Count function aprroch 
+//Best approch n.log(n)
+    public int kthSmallest(int[][] matrix, int k) {
+        int n=matrix.length;
+        int low=matrix[0][0];
+        int hi=matrix[n-1][n-1];
+  
+        while(low<hi)
+        {
+            int mid=low+(hi-low)/2;
+            int count=countfun(matrix,mid);
+            if(count<k) low=mid+1;
+            else{
+                hi=mid;
+            }
+
+        }
+        return low;
+    }
+  
+  //count using linear serch in 2d matrix strat from right top (also done using left bottom ) 
+    public static int countfun(int[][] matrix,int mid)
+    {  
+        int n=matrix.length;
+        int count=0; int j=n-1; int i=0;
+
+        while(j>=0 && i<n)
+        {
+            if(matrix[i][j] > mid){
+                j--;
+            }else{
+                count=count+j+1;
+                i++;
+            }
+        }
+       return count;
+    }
+}
+/* Approch:- best approch
+we do bineary search in matrix and find mid
+with the help of mid value we count values  less than mid(using search in  2d matrix from bootom left / top right**) 
+atlst our bineary sirch low and hig  stops at count equal to required k */
