@@ -1,0 +1,31 @@
+
+ */
+class Solution {
+    public TreeNode helper(int[] inorder,int[] postorder,int istart,int iend,int pstart,int pend,
+    HashMap<Integer,Integer> map){
+        if(pstart>pend || istart>iend) return null;
+         
+         TreeNode root= new TreeNode(postorder[pend]);
+         int midroot=map.get(postorder[pend]);
+         int leftnum=midroot-istart;
+
+        root.left=helper(inorder,postorder,istart,midroot-1,pstart,pstart+leftnum-1,map);
+        root.right=helper(inorder,postorder,midroot+1,iend,pstart+leftnum,pend-1,map);
+
+       return root;
+    }
+
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<inorder.length;i++)
+        {
+            map.put(inorder[i],i);
+        }
+           
+        TreeNode root=helper(inorder,postorder,0,inorder.length-1,0,postorder.length-1,map);//return root of tree
+
+        return root;
+        
+    }
+    
+}
