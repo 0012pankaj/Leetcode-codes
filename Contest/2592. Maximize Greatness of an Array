@@ -1,0 +1,24 @@
+class Solution {
+    public int maximizeGreatness(int[] nums) {
+        
+       int n=nums.length;
+        Arrays.sort(nums);
+        int a=0,b=0;
+        int count=0;
+        
+        while(b<n)
+        {
+            if(nums[b]>nums[a]){
+                count++;
+                a++;
+                b++;
+            }else{
+                b++;
+            }
+        }
+            
+        
+        
+        return count;
+    }
+}
