@@ -66,3 +66,16 @@ class Solution {
     }
 }
 
+_________________________________
+
+
+/* Approch:- use BFS algo use class pair for queue
+1.take a que and strore location of all rotten orange(2) with time 0.
+  take visited matrix mark 2 at rotten else zero.
+  count all fres orange(1) --> count1before
+
+2.aply bfs ,and use helper row and coll to move in 4 direction
+  take out location of rooten orange from queue and mouve around using loop.
+  if fresh find increase count1after  make it visited by putting 2/now become rotten
+  push current location in que with increase time with 1
+  * ewry time calculate maximum tim when we take out location from que  tc-->O(n*m) approx */ 
