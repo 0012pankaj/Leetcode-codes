@@ -1,0 +1,45 @@
+class Solution {
+    public boolean checkValidGrid(int[][] grid) {
+        
+        int n=grid.length;
+      return helper(grid,n,0);
+    }
+    
+    public boolean helper(int[][] grid ,int n,int count)
+    {
+        int[] r={-2,-1,1,2,-2,-1,1,2};
+        
+        int[] c={-1,-2,-2,-1,1,2,2,1};
+        
+        Queue<Integer> q=new LinkedList<Integer>();
+        q.add(0);
+        q.add(0);
+        
+        while(!q.isEmpty())
+        {
+            int find=0;
+            int x=q.poll();
+            int y=q.poll();
+            
+            for(int i=0;i<r.length;i++)
+            {
+                int r1=x+r[i];
+                int c1=y+c[i];
+                
+                if(r1>=0 && r1<n && c1>=0 && c1 < n && grid[r1][c1]==count+1){
+                    x=r1;
+                    y=c1;
+                    find=1;
+                    break;
+                }
+            }
+            
+            if(find==1){
+                q.add(x); q.add(y);
+            } 
+           count++; 
+        }
+        
+        return count==(n*n)? true :false;
+    }
+}
