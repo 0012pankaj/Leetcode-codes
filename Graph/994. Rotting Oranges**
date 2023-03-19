@@ -1,0 +1,68 @@
+class pair{
+    int row,col,tim;
+    public pair(int row,int col,int tim)
+    {
+        this.row=row;
+        this.col=col;
+        this.tim=tim;
+    }
+}
+ //---------------------------------------------------------
+class Solution {
+    public int orangesRotting(int[][] grid) {
+
+        int n=grid.length;
+        int m=grid[0].length;
+
+        Queue<pair> q=new LinkedList<>();
+        int  vis[][]=new  int[n][m];
+
+        int count1before=0;
+    
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2){
+                    q.add(new pair(i,j,0));
+                    vis[i][j]=2;
+                }else{
+                    vis[i][j]=0;
+                }
+
+                if(grid[i][j]==1) count1before++;
+            }
+        }
+        //---------------------------------------------------------------------------
+        //helper row,col
+        int[] rr={1,-1,0,0};
+        int[] cc={0,0,-1,1};
+
+        //bfs
+        int count1after=0;
+        int tm=0;
+        while(!q.isEmpty())
+        { 
+           int r=q.peek().row;
+           int c=q.peek().col;
+           int t=q.peek().tim;
+           tm=Math.max(t,tm);
+           q.remove();
+
+           for(int i=0;i<4;i++){
+               int xr=r+rr[i];
+               int xc=c+cc[i];
+               if(xr >=0 && xr<n && xc >=0 && xc<m && vis[xr][xc]==0 && grid[xr][xc]==1){
+                   count1after++;
+                   vis[xr][xc]=2;
+                   q.add(new pair(xr,xc,t+1));
+               }
+           }        
+          
+        }
+
+        if(count1before != count1after) return -1;
+
+        return tm;
+    }
+}
+
