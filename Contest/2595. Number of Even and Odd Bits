@@ -1,0 +1,25 @@
+class Solution {
+    public int[] evenOddBit(int n) {
+        int[] ans=new int[2];
+        int x=0,y=0;
+        int counter=0,even=0,odd=0;
+        while(n>0)
+        {
+            x=n%2;
+            if(counter%2!=0 && x==1){
+                odd++;
+            }
+            if(counter%2==0 && x==1){
+                even++;
+            }
+            counter++;
+            n=n/2;
+        }
+      
+        ans[0]=even;
+        ans[1]=odd;
+     
+        
+        return ans;
+    }
+}
