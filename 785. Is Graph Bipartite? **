@@ -1,0 +1,35 @@
+/*Biparted graph if we fil two colours in a graph alternately and ig we found to adjecent node with same color then the graph is not bipart else biparted*/
+//Approch :- we made a color array contain to color adjrcently of adjrnt node using dfs fill color and check if adjesent or next node is already colored with same as current
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        
+        int color[]=new int[graph.length];
+
+        for(int i=0;i<graph.length;i++)
+        {  
+           if(color[i]==0 && dfs(graph,color,i,1)==false){
+               return false;
+           } 
+        }
+
+       return true; 
+    }
+
+    public boolean dfs(int[][] graph,int[] color,int node,int clr){
+           
+        color[node]=clr;
+
+        for(int item : graph[node]){
+             
+            if(color[item]==0){
+                 if(dfs(graph,color,item,-clr)== false){
+                      return false;
+                    }
+            }else if(color[item]==clr){ //main logic:- node already colered with with same color of its adjecent node
+                 return false;
+             }
+            
+        }
+      return true;
+    }
+}
