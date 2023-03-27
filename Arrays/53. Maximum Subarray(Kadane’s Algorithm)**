@@ -1,0 +1,16 @@
+class Solution {/* Kadane’s Algorithm Tc-->O(n) sp-->O(1)*/
+    public int maxSubArray(int[] nums) {
+        int res=nums[0],maximum_ending=nums[0];
+
+        for(int i=1;i<nums.length;i++){
+             maximum_ending=Math.max(maximum_ending+nums[i],nums[i]);
+             res=Math.max(res,maximum_ending);
+        }
+
+        return res;
+    }
+}
+/*
+Approch:-
+we just doing track of previous maximum sum of digits  which also contain
+and compare by adding current to it and current .*/
