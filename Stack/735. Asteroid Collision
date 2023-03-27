@@ -1,0 +1,32 @@
+/*Approch :- use stack DS
+we push element if
+1.it is positive
+2.if stack is empty or it contain negative element
+we pop element if
+1.curent abs value is equal to stack peek
+2.or continuesly pop if curent value is negative and its absolute is greater thab peek()which is positive
+ */
+
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> st=new Stack<Integer>();
+
+        for(int ele : asteroids){  
+          if(ele >0){
+              st.push(ele);
+          }else{
+              
+             while(!st.isEmpty() && st.peek() > 0 && st.peek() < Math.abs(ele)){
+                  st.pop();
+              }
+
+              if(!st.isEmpty() && st.peek() == Math.abs(ele)){
+                  st.pop();
+              }
+              else if(st.isEmpty() || st.peek() <0){
+                  st.push(ele);
+              }  
+          }
+       
+        }
+        
