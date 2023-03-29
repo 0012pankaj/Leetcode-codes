@@ -1,7 +1,7 @@
 class Solution {
     public int maximumScore(int[] nums, int k) {
         return largestRectangleArea(nums,k);
-        //if(right[i]-1 >=k && left[i] <k) we add this condition only in this 
+        //if(right[i]-1 >=k && left[i]+1 <=k) we add this condition only in this 
     }
  public int largestRectangleArea(int[] a,int k) {
      
@@ -50,7 +50,7 @@ class Solution {
     int max_area=0;
     for(int i=0;i<n;i++)
         {    
-            if(right[i]-1 >=k && left[i] <k){
+            if(right[i]-1 >=k && left[i]+1 <=k){
                 int width=right[i]-left[i]-1;                    //FIDING WIDTH-->(index of right smallest -index of ledt smallest -1)
                  max_area=Math.max(max_area,a[i]*width);          //MAXIMUM AREA
             }
