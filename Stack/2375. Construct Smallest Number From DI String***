@@ -1,0 +1,29 @@
+class Solution {  /* Using space*/
+    public String smallestNumber(String pattern) {
+       
+       int n=pattern.length();
+       Stack<Integer> st=new Stack<Integer>();
+      
+       String ans="";
+       int count=1;
+    for(int i=0;i<n;i++){
+       char c=pattern.charAt(i);
+       if(c =='D'){
+           st.push(count++);         
+       }else {
+           st.push(count++);
+            while(!st.isEmpty()){
+                ans+=st.pop();
+            
+             }
+       }
+       
+    }
+       st.push(count++);
+     while(!st.isEmpty()){
+            ans+=st.pop();
+        }
+  
+     return ans;
+    }
+}
