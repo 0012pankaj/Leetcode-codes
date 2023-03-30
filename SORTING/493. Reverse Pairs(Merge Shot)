@@ -1,0 +1,74 @@
+class Solution {   //USING MERGESHOT small addition
+    public int reversePairs(int[] nums) {
+      
+        int n=nums.length;
+         
+        int count=mergeshot(nums,0,n-1);// modification before merging two sorted array and return type int
+        return count;
+    }
+
+    	//mergeshot
+	public static int mergeshot(int[] arr,int start,int end){
+     
+	    if(start>=end){
+	        return 0;
+	    }
+	    
+	    int mid=(start+end)/2;
+	      int c=0;
+	     c+= mergeshot(arr,start,mid);
+	     c+=  mergeshot(arr,mid+1,end);
+	      
+	     c+= mergeTosorted(arr,start,mid,end);
+
+         return c;
+	}
+	
+	
+
+       public static int mergeTosorted(int[] arr,int start,int mid,int end)
+	  {   //____________________________________________add in merge shot
+           int count=0;
+           int j=mid+1;
+           for(int i=start;i<=mid;i++){
+               while(j<=end && arr[i] > (2*(long)arr[j])){
+                   j++;
+               }
+               count +=  (j-(mid+1));
+           }
+         //__________________________________________________
+
+	      int index1=start;
+	      int index2=mid+1;
+	      
+	      int size=end-start+1;
+	      int[] temp=new int[size];
+	      int k=0;
+	      
+	      while(index1<=mid && index2 <=end){
+	          if(arr[index1] <= arr[index2]){
+	              temp[k++]=arr[index1++];
+	            
+	          }else{
+	              temp[k++]=arr[index2++];
+	              
+	          }
+	          
+	      }
+	      
+	      while(index1<=mid){
+	          temp[k++]=arr[index1++];
+	
+	      }
+	       while(index2<=end){
+	          temp[k++]=arr[index2++];
+	         
+	      }
+	      
+	      k=0;
+	      for(int i=start;i<=end;i++){
+	          arr[i]=temp[k++];
+	      }
+          return count;
+	  }
+}
