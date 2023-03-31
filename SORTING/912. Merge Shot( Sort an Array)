@@ -1,0 +1,44 @@
+class Solution {         /*MERGE SHOT O(n log(n))*/
+    public int[] sortArray(int[] nums) {
+        Mergeshot(nums,0,nums.length-1);
+        return nums;
+    }
+    public static void Mergeshot(int[] arr,int s,int e){
+        if(s>=e) return;
+         
+        int mid=(s+e)/2;
+        Mergeshot(arr,s,mid);
+        Mergeshot(arr,mid+1,e);
+
+        mergeTosorted(arr,s,mid,e);
+    }
+
+    public static void mergeTosorted(int[] arr,int s,int mid,int e){
+        int index1=s;
+        int index2=mid+1;
+
+        int n=(e-s)+1;
+        int temp[]=new int[n];
+        int k=0;
+
+        while(index1<=mid && index2 <=e){
+            if(arr[index1]<=arr[index2]){
+                temp[k++]=arr[index1++];
+            }else{
+                 temp[k++]=arr[index2++];
+            }
+        }
+
+        while(index1<=mid){
+            temp[k++]=arr[index1++]; 
+        }
+
+          while(index2<=e){
+            temp[k++]=arr[index2++]; 
+        }
+           k=0;
+        for(int i=s;i<=e;i++){
+            arr[i]=temp[k++];
+        }
+    }
+}
