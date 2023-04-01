@@ -1,0 +1,32 @@
+class Solution {
+    public int maximumCostSubstring(String s, String chars, int[] vals) {
+       
+        
+        int[] arr=new int[s.length()];
+        int x=0;
+        
+        for(int i=0;i<s.length();i++){
+            String st=""+s.charAt(i);
+            if(!chars.contains(st)){
+                arr[i]=s.charAt(i)-'a'+1;
+            }else{
+                arr[i]=vals[chars.indexOf(s.charAt(i))];
+            }
+        }
+         //kanade's Algo
+        int maxsofar=Integer.MIN_VALUE;
+        int currentmax=0;
+        for(int i=0;i<arr.length;i++){
+            currentmax+=arr[i];
+            if(maxsofar<currentmax){
+                maxsofar=currentmax;
+            }
+            if(currentmax<0){
+                currentmax=0;
+            }
+        }
+        
+        if(maxsofar<0) return 0;
+        return maxsofar;
+    }
+}
