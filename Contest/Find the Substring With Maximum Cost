@@ -1,0 +1,29 @@
+class Solution {
+    public int minNumber(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int res=0;
+        HashSet<Integer> hs=new HashSet<>();
+        for(int i=0;i<nums2.length;i++){
+            hs.add(nums2[i]);
+        }
+        
+         for(int i=0;i<nums1.length;i++){
+          
+             if(hs.contains(nums1[i])){
+            return nums1[i];
+        }
+        }
+        
+            if(nums1[0]<nums2[0]){
+                res=nums1[0]*10+nums2[0];
+            }else{
+                  res=nums2[0]*10+nums1[0];
+            }
+        
+         
+        
+        return res;
+        
+    }
+}
