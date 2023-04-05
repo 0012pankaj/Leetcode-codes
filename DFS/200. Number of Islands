@@ -1,0 +1,36 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+        boolean[][] vis=new boolean[n][m];
+
+        int r[]={0,0,-1,1};
+        int c[]={1,-1,0,0};
+        int count=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                  if(grid[i][j]=='1' && vis[i][j]==false){
+                      count++;
+                      calldfs(i,j,grid,vis,r,c);
+                  }
+            }
+        }
+        return count;
+    }
+
+    public static void calldfs(int row,int col,char[][] board,boolean[][] visited,int[] rr,int[] cc){
+        visited[row][col]=true;
+        int n=board.length;
+        int m=board[0].length;
+
+        for(int i=0;i<4;i++){
+            int r=row+rr[i];
+            int c=col+cc[i];
+
+            if(r>=0 &&c>=0 && r<n && c<m && board[r][c]=='1' &&  visited[r][c]==false){
+                 calldfs(r,c,board,visited,rr,cc);
+            }
+        }
+
+    }
+}
