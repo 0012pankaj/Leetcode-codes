@@ -1,0 +1,46 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+
+        PriorityQueue<Double> pq=new PriorityQueue<>(Collections.reverseOrder());
+        HashMap<Double,List<Integer>> mp=new HashMap<>();
+        int i=0;
+        int n=points.length;
+        // if(n==2 && k==2) return points;
+        while(i<n){
+            int x=points[i][0];
+            int y=points[i][1];
+            double distance=Math.sqrt(x*x + y*y);
+            
+            List<Integer> al = mp.getOrDefault(distance, new ArrayList<>());
+            
+
+            al.add(i);
+            mp.put(distance,al);
+           
+            if(pq.size() < k){
+                pq.add(distance);
+            }else{
+                if(pq.peek()>distance){
+                    pq.poll();
+                    pq.add(distance);
+                }
+            }
+          i++;  
+        }
+        int[][] ans=new int[k][2];
+        int x=0;
+
+           while(pq.size() > 0){
+            double val = pq.poll();
+            if(mp.containsKey(val)){
+                List<Integer> al = mp.get(val);
+                for(int idx : al){
+                   ans[x++] = points[idx];
+                }
+            }
+            mp.remove(val);
+      }
+
+      return ans;
+    }
+}
