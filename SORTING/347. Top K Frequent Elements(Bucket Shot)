@@ -1,0 +1,40 @@
+class Solution { /* two aproch using priorityq min heap(k log n) or bucket shot O(n)*/
+                                                                       //using Bucket shot tc-->O(n) sp-->O(n) best approch
+    public int[] topKFrequent(int[] nums, int k) {
+        int n=nums.length;
+        HashMap<Integer,Integer> map=new HashMap<>();
+        
+        //ferequency count
+        for(int i=0;i<n;i++){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+
+      //  creating buckets List
+     ArrayList<Integer> []bucket=new ArrayList[n+1];
+
+      //fill the bucket  there index as freq of degits and inside array aList of numbers with that count
+
+      for(int key:map.keySet() ){
+          int freq=map.get(key);
+          if(bucket[freq]==null)
+          bucket[freq]=new ArrayList<>();
+
+          bucket[freq].add(key);
+      }
+
+      //finding k largesrt element
+
+     int ans[]=new int[k];
+     int i=nums.length;
+     int x=0;
+     while(i>=0 && x<k){
+        if(bucket[i]!=null)
+        for(int item: bucket[i]){
+              ans[x++]=item;
+        }
+       i--;
+     }
+        
+     return ans;
+    }
+}
