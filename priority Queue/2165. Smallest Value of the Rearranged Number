@@ -1,0 +1,51 @@
+//Approch without pq easy approch
+
+class Solution {
+    public long smallestNumber(long num) {
+   if(num==0) return num;
+   boolean neg=false;
+   if(num<0){
+    num=Math.abs(num);
+    neg=true;
+   }
+  
+   char[] arr=(""+num).toCharArray();
+
+   Arrays.sort(arr);
+
+   int i=0;
+
+   for(;i<arr.length;i++){
+       if(arr[i]!='0')
+         break;
+   }
+   
+   String ans="";
+   if(neg){
+        ans=ans+'-';
+        for(int x=arr.length-1;x>=0;x--){
+           ans=ans+arr[x];
+          }
+   }else{
+         if(arr[0]=='0'){
+          char temp=arr[i];
+            arr[i]=arr[0];
+            arr[0]=temp;
+      }
+       for(int y=0;y<arr.length;y++){
+           ans=ans+arr[y];
+       }
+   }
+
+    return (Long.parseLong(ans));
+    }
+
+}
+/* Approxh:-
+1.check num is negative or positive
+2.if negetive mark some flag and do absalute 
+3.convert the number in to char Array and sort it
+4.if neg then ad it in string wth - in deverse order
+if positive than
+5.if fitst char is 0 swao it with first non zero number
+and than ad it in string at ;ast cover it in long using parseLong()  */
