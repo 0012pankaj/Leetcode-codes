@@ -1,0 +1,49 @@
+class Solution {   // we need to find paths that go through all 0s we use bactracking / dfs
+    public int uniquePathsIII(int[][] grid) {
+        int sx=0,sy=0,zero=0;
+
+        for(int i=0 ; i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==0){
+                    zero++;
+                }else if(grid[i][j]==1){
+                    sx=i;
+                    sy=j;
+                }
+            }
+        }
+
+        return dfspaths(grid,sx,sy,zero);
+
+                
+        }
+
+
+        public static int dfspaths(int[][] grid,int sx,int sy,int zero){
+            
+          
+          if(sx<0 ||sy<0 ||sx>=grid.length || sy >= grid[0].length || grid[sx][sy] == -1){
+              return 0;
+          }
+
+          if(grid[sx][sy] == 2)
+              return zero==-1 ? 1:0;
+          
+
+            
+            grid[sx][sy]=-1;
+            zero--;
+            int totalpaths=dfspaths(grid,sx,sy+1,zero)+
+                           dfspaths(grid,sx,sy-1,zero)+
+                           dfspaths(grid,sx+1,sy,zero)+
+                           dfspaths(grid,sx-1,sy,zero);
+            grid[sx][sy]=0;//bactrack;
+            zero++;
+
+            return totalpaths;      
+        }
+    }
+
+
+/* Algo:- we count all zero and find path using dfs and decrease count and when we reach at destination
+(2) we chec if our zero count is -1 the add that path tpo our total paths*/ 
