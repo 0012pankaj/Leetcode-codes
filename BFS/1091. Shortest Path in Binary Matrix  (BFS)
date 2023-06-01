@@ -1,0 +1,59 @@
+Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. If there is no clear path, return -1.
+
+A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) to the bottom-right cell (i.e., (n - 1, n - 1)) such that:
+
+All the visited cells of the path are 0.
+All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).
+The length of a clear path is the number of visited cells of this path.
+
+ ________________________________________________________________________________________________________________________
+
+
+
+class Solution {
+   
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int n=grid.length;
+
+        if(grid[0][0]!=0|| grid[n-1][n-1]!=0)
+          return -1;
+
+       //BFS 
+        Queue<int[]> q=new ArrayDeque<>();
+        //8 direction
+        int[][] dis=new int[][]{{0,1},{0,-1},{1,0},{-1,0},{-1,-1},{1,1},{-1,1},{1,-1}};
+        
+
+        q.offer(new int[]{0,0});
+        grid[0][0]=1;//put distance at location
+
+        while(!q.isEmpty()){
+            int[] cur=q.poll();
+            int r=cur[0];
+            int c=cur[1];
+            int distance=grid[r][c];
+            if(r==n-1 && c==n-1){
+                return distance;
+            }
+
+            for(int[] d :dis){
+                int nr=r+d[0];
+                int nc=c+d[1];
+               if(nr>=0 && nr<n && nc >=0 && nc < n && grid[nr][nc]==0 ){
+                   q.offer(new int[]{nr,nc});
+                   grid[nr][nc]=distance+1;
+               }
+
+            }
+
+        }
+      
+
+      return -1;
+       
+    }
+
+}
+/*It is simple breadth first search (BFS) traversal of the matrix.
+
+BFS is chosen over depth-first search (DFS) because DFS may not guarantee finding the shortest path in certain scenarios.*/
