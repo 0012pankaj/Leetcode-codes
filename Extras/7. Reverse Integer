@@ -1,0 +1,39 @@
+class Solution {
+    public int reverse(int x) {
+    long y=0;
+    int mflag=0;
+     if(x<0){
+         String s=Integer.toString(x);
+         s=s.substring(1);
+         long z= Long.parseLong(s);
+            mflag=1;
+
+             while(z>0){
+            long r=z%10;
+            y=y*10+(long)r;
+            z=z/10;
+             }
+       
+        }
+        else{
+              while(x>0){
+            int r=x%10;
+            y=y*10+(long)r;
+            x=x/10;
+           }
+       
+        }
+
+      
+        
+
+        if(y<= Math.pow(2,31)-1 &&  y>= Math.pow(2,-31)) {
+            if(mflag==1){
+                 return (int)y*-1;
+            }
+            return (int)y;
+        }
+
+        return 0;
+    }
+}
