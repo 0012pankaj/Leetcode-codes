@@ -1,0 +1,16 @@
+class Solution {
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        Arrays.sort(arr);
+        if(arr.length<=2) return true;
+           int d=arr[0]-arr[1];
+        for(int i=1;i<arr.length-1;i++){
+            int x=arr[i];
+            int y=arr[i+1];
+            if(x-y != d){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
