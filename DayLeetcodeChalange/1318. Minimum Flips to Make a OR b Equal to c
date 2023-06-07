@@ -1,0 +1,83 @@
+class Solution {
+    public int minFlips(int a, int b, int c) {
+         
+         
+        ArrayList<Integer> l1=new ArrayList<>();
+        ArrayList<Integer> l2=new ArrayList<>();
+        ArrayList<Integer> l3=new ArrayList<>();
+
+         while(a>0){
+            l1.add(a%2);
+             a=a/2;
+         }
+
+          while(b>0){
+            l2.add(b%2);
+             b=b/2;
+         }
+
+          while(c>0){
+            l3.add(c%2);
+             c=c/2;
+         }
+         
+         int msize=Math.max(l1.size(),l2.size());
+           msize=Math.max(msize,l3.size());
+           while(l1.size()!= msize){
+               l1.add(0);
+           }
+           while(l2.size()!= msize){
+               l2.add(0);
+           }
+           while(l3.size()!= msize){
+               l3.add(0);
+           }
+           
+         
+       
+         int count=0;
+         for(int i=0;i<l1.size();i++){
+             if(l1.get(i)!=l3.get(i)){
+                 if(l2.get(i)!= l3.get(i)){
+                     
+                     if(l1.get(i)==0 && l2.get(i)==0 && l3.get(i)==1){
+                         count++;
+                     }else if(l1.get(i)==1 && l2.get(i)==1 && l3.get(i)==0){
+                         count+=2;
+                     }
+                 }else if(l1.get(i)==1 && l2.get(i)==0 && l3.get(i)==0){
+                         count++;
+                     }else if(l1.get(i)==0 && l2.get(i)==1 && l3.get(i)==0){
+                         count++;
+                     }
+             }else if(l1.get(i)==1 && l2.get(i)==0 && l3.get(i)==0){
+                         count++;
+                     }else if(l1.get(i)==0 && l2.get(i)==1 && l3.get(i)==0){
+                         count++;
+                     }
+         }
+         
+          return count;
+         
+    }
+    /*real answer
+    class Solution {  
+    public int minFlips(int a, int b, int c) {
+        int ans = 0;
+        while (a != 0 || b != 0 || c != 0) {
+            int x1 = a & 1;
+            int x2 = b & 1;
+            int x3 = c & 1;
+            if ((x1 | x2) != x3) {
+                if ((x1 & x2) == 1)
+                    ans += 2;
+                else
+                    ans += 1;
+            }
+            a = a >> 1;
+            b = b >> 1;
+            c = c >> 1;
+        }
+        return ans;
+    }*/
+}
