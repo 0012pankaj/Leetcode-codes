@@ -1,0 +1,26 @@
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+
+        if(nums.length==1)return nums[0];
+        int s=0;
+        int e=nums.length-1;
+        while(s<e){
+             int mid=(s+e)/2;
+            if((mid%2==1 && nums[mid]==nums[mid-1] ) ||(mid%2==0 && nums[mid]==nums[mid+1] )){
+                s=mid+1;
+            }
+            else{ 
+                e=mid;
+            }
+     
+     
+    }
+return nums[s];
+    }
+}
+
+/* logic:-
+from eg1:
+if we are on even index and it left(mid-1) is same then our element/ans is  on that side
+from eg2;
+if we are on odd index and i\its same element is on left side(mid-1) the ans is on opposite side*/
