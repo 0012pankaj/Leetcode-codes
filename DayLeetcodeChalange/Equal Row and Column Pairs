@@ -1,0 +1,26 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+        int n=grid.length;
+        int count=0;
+        for(int i=0;i<n;i++){
+            int num=grid[0][i];
+           for(int j=0;j<n;j++){
+               if(num==grid[j][0] && checkthem(grid,i,j,n)){
+                   count++;
+               }
+           }
+        }
+        return count;
+    }
+
+    public static boolean checkthem(int[][] grid,int x,int y,int n){
+
+        for(int i=0;i<n;i++){
+            if(grid[y][i]!=grid[i][x]){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
