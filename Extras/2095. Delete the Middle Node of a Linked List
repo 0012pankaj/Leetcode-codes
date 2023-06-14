@@ -1,0 +1,19 @@
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        if(head==null ||head.next == null) return null;
+         //Floyd national flag algo/ fast and slow
+        ListNode node=head;
+         ListNode node1=head;
+         ListNode prev=null;
+   
+        while(node1 != null && node1.next != null ){
+            prev=node;
+            node=node.next;
+            node1=node1.next.next;
+        }
+        // if(prev !=null && node!=null)
+           prev.next=node.next;
+
+       return head;
+    }
+}
