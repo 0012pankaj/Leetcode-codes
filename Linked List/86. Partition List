@@ -1,0 +1,25 @@
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode l1=new ListNode(0);
+        ListNode ans=l1;
+        ListNode l2=new ListNode(0);
+        ListNode ansss=l2;
+        ListNode curr=head;
+
+        while(curr!=null){
+            if(curr.val < x){
+                l1.next=curr;
+                l1=l1.next;
+            }else{
+                l2.next=curr;
+                l2=l2.next;
+            }
+            curr=curr.next;
+        }
+
+        l1.next=ansss.next;
+        l2.next=null;
+
+        return ans.next;
+    }
+}
