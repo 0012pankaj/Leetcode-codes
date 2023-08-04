@@ -1,0 +1,36 @@
+class Solution {
+    public List<String> removeAnagrams(String[] words) {
+        List<String> ans=new ArrayList<>();
+        int i=0;
+        while(i<words.length){
+            int j=i+1;
+            while(j<words.length && anagram(words[i],words[j])){
+                j++;
+            }
+
+            ans.add(words[i]);
+            i=j;
+            
+        }
+
+        return ans;
+    }
+
+    public static boolean anagram(String s1,String s2){
+        int [] arr=new int[26];
+        for(int i=0;i<s1.length();i++){
+            arr[s1.charAt(i)-'a']++;
+        }
+         for(int i=0;i<s2.length();i++){
+            arr[s2.charAt(i)-'a']--;
+        }
+
+        for(int i=0;i<26;i++){
+           if (arr[i]!=0){
+               return false;
+           }
+        }
+
+        return true;
+    }
+}
