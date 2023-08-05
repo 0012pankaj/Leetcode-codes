@@ -1,0 +1,21 @@
+class Solution {
+    public boolean judgeSquareSum(int c) {                // two pointer
+        long left =0;
+        long right=(int)Math.sqrt(c);
+
+        while(left<=right){
+            long ans=(left*left) + (right*right);
+            if(ans==c){
+                return true;
+            }else if( ans >c){
+              
+                    right--;
+            }else{
+                   left++;
+            }
+        }
+        
+
+        return false;
+    }
+}
