@@ -1,0 +1,57 @@
+class Solution {
+    public String pushDominoes(String dom) {
+        int n= dom.length();                        //Tc=O(n) Sp=O(n)
+        int left[]=new int[n];
+        int right[]=new int[n];
+        int nlindex=-1;
+
+      //left force
+        for(int i=n-1 ; i>=0;i--){
+            if(dom.charAt(i)=='L'){
+                nlindex=i;
+            }else if(dom.charAt(i)=='R'){
+                nlindex=-1;
+            }
+
+            left[i]=nlindex;
+        }
+       //right force
+       int  nRindex=-1;
+        for(int i=0 ; i<n;i++){
+            if(dom.charAt(i)=='R'){
+                nRindex=i;
+            }else if(dom.charAt(i)=='L'){
+                nRindex=-1;
+            }
+
+            right[i]=nRindex;
+        }
+
+        //calculate
+
+        char ans[]=new char[n];
+
+        for(int i=0;i<n;i++){
+
+            if(dom.charAt(i)=='.'){
+             
+             int nerleft=left[i];
+             int nerright=right[i];
+
+             int leftdiff= nerleft==-1 ? Integer.MAX_VALUE : Math.abs(nerleft-i);
+             int rightdiff= nerright==-1 ? Integer.MAX_VALUE : Math.abs(nerright-i);
+
+             if(leftdiff == rightdiff){
+                 ans[i]='.';
+             }else if(leftdiff < rightdiff){
+                 ans[i]='L';
+             }else if(leftdiff > rightdiff){
+                 ans[i]='R';
+            }
+        }else{
+            ans[i]=dom.charAt(i);
+        }      
+    }
+   return new String(ans);
+}
+}
