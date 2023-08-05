@@ -1,0 +1,29 @@
+class Solution {
+    public int partitionDisjoint(int[] num) {
+//hint :Every element in left is less than or equal to every element in right.
+//tc=O(n) sp=O(n)
+        int n=num.length;
+        int leftmax[]=new int[n];
+        int rightmin[]=new int[n];
+        int max=Integer.MIN_VALUE;
+
+        for(int i=0;i<n;i++){
+             max=Math.max(max,num[i]);
+            leftmax[i]=max;
+        }
+
+        int min=Integer.MAX_VALUE;
+           for(int i=n-1;i>=0;i--){
+             min=Math.min(min,num[i]);
+            rightmin[i]=min;
+        }
+
+        for(int i=1;i<n;i++){
+            if(leftmax[i-1]<=rightmin[i]){
+                return i;
+            }
+        }
+        
+        return n;
+    }
+}
