@@ -1,0 +1,42 @@
+class Solution {
+    public int minSwaps(int[] arr) {
+        int n=arr.length;
+        int none=0;
+
+        //count no. 1
+        for(int i=0;i<n;i++){
+            if(arr[i]==1){
+                none++;
+            }
+        }
+
+        int arr1[]=new int[n*2];
+       //create circular to linear arry
+         for(int i=0;i<n*2;i++){
+            arr1[i]=arr[i%n];
+        }
+        
+        //SLIDING WINDOW take size of window as no.of one
+        int z=0;
+         for(int i=0;i<none;i++){
+            if(arr1[i]==0){
+                z++;
+            }
+        }
+        int ans=z;
+
+         for(int i=none;i<arr1.length;i++){
+            if(arr1[i]==0){
+                z++;
+                
+            }
+
+            if(arr1[i-none] == 0) z--;
+
+            ans=Math.min(ans,z);
+        }
+
+  return ans;
+
+    }
+}
