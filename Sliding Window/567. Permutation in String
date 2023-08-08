@@ -1,0 +1,35 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+         List<Integer> ans=new ArrayList<>();
+        int n=s1.length();
+        int s1freq[]=new int[26];
+        for(int i=0;i<s1.length();i++){
+            s1freq[s1.charAt(i)-'a']++;
+       }
+
+       int s2freq[]=new int[26];
+
+       int l=0;
+       int r=0;
+     // sliding window  
+       while(r<s2.length()){
+           //grow
+           s2freq[s2.charAt(r)-'a']++;
+
+           //decrease
+           while(l<r && r-l+1 > n){
+               s2freq[s2.charAt(l)-'a']--;
+               l++;
+           }
+
+           if(Arrays.equals(s1freq,s2freq)){
+             return true;
+           }
+
+           r++;
+       }
+
+       return false;
+        
+    }
+}
