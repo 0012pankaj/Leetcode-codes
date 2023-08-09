@@ -1,0 +1,49 @@
+class Solution {
+    public int maxScore(int[] arr, int k) {
+        int n=arr.length;
+
+        //sum of array
+        int arrsum=0;
+        for(int i=0;i<n;i++){
+         arrsum+=arr[i];
+        }
+
+        int k1=n-k;
+        int ans=0;
+        int sum=0;
+
+         for(int i=0;i<k1;i++){
+         sum+=arr[i];
+        }
+        ans=Math.max(ans,arrsum-sum);
+        int j=k1;
+        while(j<n){
+
+            sum+=arr[j];
+            sum-=arr[j-k1];
+     
+          ans=Math.max(ans,arrsum-sum);
+
+          j++;
+
+
+        }
+       
+        
+        return ans;
+    }
+}
+
+/*Approch:-
+
+n=size of array
+If we try first example [1 2 3 4 5 6 1] options are
+1+2+3=6 left elements--> 4 5 6 1
+1+1+2=4 left elements--> 3 4 5 6
+1+1+6=8 left elements--> 2 3 4 5
+1+6+5=12 left elements--> 1 2 3 4
+so maximum is 12.
+so if one clearly observe the left elements form subarray of size n-k.
+One have to find the subarray of size n-k with maximum (total sum of array - subarray sum).
+
+*/
