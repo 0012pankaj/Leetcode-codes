@@ -1,0 +1,81 @@
+Given a 2D grid of size m x n and an integer k. You need to shift the grid k times.
+
+In one shift operation:
+
+Element at grid[i][j] moves to grid[i][j + 1].
+Element at grid[i][n - 1] moves to grid[i + 1][0].
+Element at grid[m - 1][n - 1] moves to grid[0][0].
+Return the 2D grid after applying shift operation k times.
+
+ 
+
+Example 1:Input: grid = [[1,2,3],[4,5,6],[7,8,9]], k = 1
+Output: [[9,1,2],[3,4,5],[6,7,8]] in java usin flat index concept
+Given the problem and using the concept of the flat index for 2D grids, we can solve the problem as follows:
+Sol-------------------------
+Convert the 2D grid into a 1D array.
+Rotate the 1D array k times.
+Convert the rotated 1D array back to a 2D grid.
+
+
+__________________________________---
+import java.util.*;
+
+public class GridShift {
+
+    public static int[][] shiftGrid(int[][] grid, int k) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int total = m * n;
+
+        // Convert 2D grid to 1D array
+        int[] arr = new int[total];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i * n + j] = grid[i][j];
+            }
+        }
+
+        // Rotate 1D array k times
+        k = k % total;  // Optimization: Rotate only the required times
+        reverse(arr, 0, total - 1);
+        reverse(arr, 0, k - 1);
+        reverse(arr, k, total - 1);
+
+        // Convert 1D array back to 2D grid
+        int[][] result = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                result[i][j] = arr[i * n + j];
+            }
+        }
+
+        return result;
+    }
+
+    // Helper function to reverse part of an array
+    public static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[][] grid = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int k = 1;
+
+        int[][] result = shiftGrid(grid, k);
+
+        // Print the result
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
