@@ -1,0 +1,20 @@
+			Binary Search	
+1	BS	Easy	https://leetcode.com/problems/valid-perfect-square/	Valid Perfect Square
+2	BS	Easy	https://leetcode.com/problems/arranging-coins/	Arranging Coins
+3	BS	Easy	https://leetcode.com/problems/binary-search/	Binary Search
+4	BS	Easy	https://leetcode.com/problems/find-smallest-letter-greater-than-target/	Find Smallest Letter
+5	BS	Easy	https://leetcode.com/problems/guess-number-higher-or-lower/	Guess number or Higher
+6	BS	Easy	https://leetcode.com/problems/peak-index-in-a-mountain-array/	Peak index in Mountain array
+7	BS	Easy	https://leetcode.com/problems/first-bad-version/	First Bad Version
+8	BS	Easy	https://leetcode.com/problems/h-index-ii/	H - Index 2
+9	BS	Easy	https://leetcode.com/problems/find-k-closest-elements/	Find K closest Elements
+10	BS	Easy	https://leetcode.com/problems/koko-eating-bananas/	Koko Eating Bananas
+11	BS	Easy	https://leetcode.com/problems/maximum-nesting-depth-of-two-valid-parentheses-strings/	Maximum Nesting Deptth
+12	BS	Hard	https://leetcode.com/problems/count-of-smaller-numbers-after-self/	Count of Smaller Number
+13	BS	Hard	https://leetcode.com/problems/count-of-range-sum/	Count of RangeSum
+14	BS	Hard	https://leetcode.com/problems/russian-doll-envelopes/	Russian Doll
+15	BS	Hard	https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/	Max sum of rectangles
+16	BS	Hard	https://leetcode.com/problems/split-array-largest-sum/	Split array Sum less than K
+17	BS	Hard	https://leetcode.com/problems/reverse-pairs/	Reverse Pairs
+18	BS	Hard	https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/	Preimage Using Trainling Zeros
+				
