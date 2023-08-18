@@ -1,0 +1,21 @@
+class Solution {
+    public int minSwaps(String s) {
+        int open_Bracket=0;
+        int swap=0;
+        for(int i=0;i<s.length();i++){
+          char c=s.charAt(i);
+          if(c=='['){
+            open_Bracket++;
+          }else if(open_Bracket>0 && c==']'){
+            open_Bracket--;
+          }else{
+            // it is close bracket ned to swap it and add as open bracket
+            swap++;
+            //increase count of open bracket
+            open_Bracket++;
+          }
+        }
+
+        return swap;
+    }
+}
