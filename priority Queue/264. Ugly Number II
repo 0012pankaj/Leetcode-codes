@@ -1,0 +1,27 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+        PriorityQueue<Long> pq=new PriorityQueue<Long>();
+        //contains in pq tak O(n) time to reduse us Hash Set
+        HashSet<Long> hs=new HashSet<>();
+        n=n-1;
+        hs.add(1l);
+        pq.add(1l);
+        while(n>0){
+            long x=pq.poll();
+            if(hs.add(x*2)){
+                pq.add(x*2);
+            }
+             if(hs.add(x*3)){
+                pq.add(x*3);
+            }
+             if(hs.add(x*5)){
+                pq.add(x*5);
+            }
+            n--;
+        }
+        long ans=pq.poll();
+
+        return  (int)ans;
+        
+    }
+}
