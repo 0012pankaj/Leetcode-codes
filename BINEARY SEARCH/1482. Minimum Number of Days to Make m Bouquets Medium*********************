@@ -1,0 +1,58 @@
+class Solution {  // Algo Bineary Search
+    public int minDays(int[] bd, int m, int k) {
+        //edge case
+        long val=k*m;
+        int n=bd.length;
+        if(val > n)return -1;
+
+        //find max and min for range in BS
+         int mini=Integer.MAX_VALUE;
+         int maxi=Integer.MIN_VALUE;
+
+         for(int i=0;i<n;i++){
+             maxi=Math.max(maxi,bd[i]);
+             mini=Math.min(mini,bd[i]);
+         }
+        
+        //bineary Search apply
+        int low=mini;
+        int high=maxi;
+        int ans=-1;
+        
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            //check possiblity of mid element
+            if(ispossible( bd, m, k,mid)){
+                ans=mid;
+                high=mid-1;
+            }else{
+                low=mid+1;
+
+            }
+        }
+
+        return ans;
+
+
+    }
+
+    public static boolean ispossible(int[] bd, int m, int k,int day){
+
+        int count=0;
+        int bouquet=0;
+
+        for(int i=0;i<bd.length;i++){
+            if(bd[i]<=day){
+                count++;
+            }else{
+                bouquet+=(count/k);
+                count=0;
+            }
+        }
+        bouquet+=(count/k);
+
+        return bouquet>=m;
+    }
+}
+
+//stiver
