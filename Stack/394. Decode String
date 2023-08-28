@@ -1,0 +1,42 @@
+class Solution {
+    public String decodeString(String s) {
+        Stack<Integer> stn=new Stack<>();
+        Stack<StringBuilder> sts=new Stack<>();
+        StringBuilder str=new StringBuilder();
+        int number=0;
+
+        for(char ch: s.toCharArray()){
+            if(ch>= '0' && ch <='9'){
+              number=number*10 + ch-'0' ;
+            }else if( ch=='['){
+                //store previous string stack an count
+                sts.push(str);
+                str=new StringBuilder();
+                stn.push(number);
+                number=0;
+
+             }else if( ch==']'){
+               
+               StringBuilder t=str;
+                str=sts.pop();
+                int count=stn.pop();
+
+                while(count-- > 0){
+                    str=str.append(t);
+                }
+
+            }else{
+                str.append(ch);
+            }
+        }
+        
+        
+        return str.toString();
+    }
+}
+
+/* Algorithum ;-
+we use two stack and string builder
+1 stack fore storing created string /previous
+2.stack store count  for itration 
+now we have to handel three case  no easily understand code
