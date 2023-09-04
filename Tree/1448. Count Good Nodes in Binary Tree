@@ -1,0 +1,29 @@
+class Solution {
+    public int goodNodes(TreeNode root) {
+     int []count=new int[1];
+     dfscall(root,count,root.val);
+
+     return count[0];
+
+    }
+    public static void dfscall(TreeNode node, int[] count,int max){
+        if(node==null){
+            return ;
+        }
+
+        if(node.val >= max){
+            count[0]++;
+            max=node.val;
+        }
+        //dfs call in bhoth side
+
+        if(node.left != null){         
+              dfscall(node.left,count,max);
+
+        }
+         if(node.right != null){         
+              dfscall(node.right,count,max);
+
+        }
+    }
+}
