@@ -1,0 +1,23 @@
+ class Solution {
+    public int pairSum(ListNode head) {
+      ArrayList<Integer> al=new ArrayList<>();
+      ListNode cur=head;
+      while(cur != null){
+          al.add(cur.val);
+          cur=cur.next;
+      }
+     
+     int siz=al.size();
+     int i=0;
+     int j=siz-1;
+       int maximum=Integer.MIN_VALUE;
+     while(i<j){
+       int sum=  al.get(i)+al.get(j);
+       maximum=Math.max(maximum,sum);
+       i++;
+       j--;      
+     }
+
+      return maximum;  
+    }
+}
