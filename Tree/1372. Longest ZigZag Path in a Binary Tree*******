@@ -1,0 +1,20 @@
+class Solution {//using dfs
+    int maxlen=0;
+    public int longestZigZag(TreeNode root) {
+        dfscall(root,0,0); //call for dfs
+         return maxlen;
+    }
+
+    public void dfscall(TreeNode node,int direction,int currlen){
+        if(node==null) return;
+        maxlen=Math.max(maxlen,currlen);                                            // calculate max length at each level
+         
+          dfscall(node.left,0,direction==0 ? 1 : currlen+1);                            //left call
+          dfscall(node.right,1,direction==1 ? 1 : currlen+1);                                      // right call
+
+                                                                            /*logic: keep track of previous node if we are going in same direction
+                                                                                  then start length with  1 
+                                                                                        else add current length +1*/
+ 
+    }
+}
