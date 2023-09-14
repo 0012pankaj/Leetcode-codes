@@ -1,0 +1,27 @@
+class Solution {  //1d DP using tabulation method tc->O(n) sp->O(1)
+
+    public int rob(int[] nums) {
+        int n=nums.length;
+        int dp[]=new int[n];//only use to store value 
+
+        dp[0]=nums[0];
+       
+        for(int i=1;i<n;i++){
+         
+         //for picking curr value and next to its previous from dp-store
+         int pickit=nums[i];
+         if(i>1) pickit += dp[i-2]; //not adjecent
+          
+          //for not picking curr value and next to its previous
+          //pic only previous from dp-store
+          int picprev=dp[i-1];
+
+          //store currvlaue at dp acc to statment
+          dp[i]=Math.max(pickit,picprev);
+
+        }
+
+
+        return dp[n-1];
+    }
+}
