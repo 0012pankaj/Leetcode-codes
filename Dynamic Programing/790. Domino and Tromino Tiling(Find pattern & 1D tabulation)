@@ -1,0 +1,31 @@
+/* in this we use 1D Dp Tabulation 
+first we find the patern of quection 
+by appling value of n from 1 t0 5 
+and we observ that 
+value at n is come out to be 2*(value at n-1)+(value at n-3)
+so, we use dp to store value and get value at required time  
+ dp[i]=2*dp[i-1]+dp[i-3];
+Constraints:
+1 <= n <= 1000 ,dp[1000+1] // Dp_store: use to store value
+*/
+
+class Solution {
+    public int numTilings(int n) {
+
+       long dp[] =new long [1001];
+       int mod=1_000_000_007;
+        dp[0]=0;
+        dp[1]=1;
+        dp[2]=2;
+        dp[3]=5;//get from example
+
+        if(n<=3) return (int)dp[n];
+
+        for(int i=4;i<=n;i++){
+            dp[i]=2*dp[i-1]+dp[i-3];
+            dp[i]%=mod;
+        }
+        
+        return (int)dp[n]; 
+    }
+}
