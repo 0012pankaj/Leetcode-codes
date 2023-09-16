@@ -1,0 +1,28 @@
+class Solution { //using 2D Dp Memoization tc-->O(n*m) sp->O(n*m)
+
+    public int minPathSum(int[][] grid) {
+         //create Dp
+         int m=grid.length;
+         int n=grid[0].length;
+        int[][] dp=new int[m][n];
+        //fill with -1;
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+
+      return minPathSum_usingDP(grid,m-1,n-1,dp);
+    }
+    
+    // we move bottem-up (up,left)
+    public static int minPathSum_usingDP(int[][] grid,int i,int j,int[][] dp){
+      if(i==0 && j==0) return grid[i][j];  // base case
+      if(i<0 || j<0 ) return (40000);    //maximum posible cvalue  ,given 1 <= m, n <= 200,0 <= grid[i][j] <= 200
+      
+      if(dp[i][j]!= -1) return dp[i][j];
+
+      int up=grid[i][j]+minPathSum_usingDP(grid,i-1,j,dp);
+      int left=grid[i][j]+minPathSum_usingDP(grid,i,j-1,dp);
+
+      return dp[i][j]=Math.min(left,up);
+    }
+}
