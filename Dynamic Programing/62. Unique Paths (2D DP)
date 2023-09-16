@@ -1,0 +1,37 @@
+class Solution {      // using 2D DP Memoization  tc->O(n*m) sp->O(n*m)
+    public int uniquePaths(int m, int n) {
+        //create Dp
+        int[][] dp=new int[m][n];
+        //fill with -1;
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+
+      return  uniquePaths_usingDP(m-1,n-1,dp);
+    }
+    
+    //given : obot tries to move to the bottom-right but we move up-left ts same means 
+    //In uniquePaths_usingDP(m,n,dp) we try to reach (0,0) from (m,n) Count when reach 0,0
+
+     //[move bottom to up]***************
+     public static int uniquePaths_usingDP(int i,int j,int[][] dp){
+         if(i==0 && j==0) return 1;
+         if(i<0 || j<0) return 0;
+         
+         if(dp[i][j]!= -1) return dp[i][j];
+   
+          int up= uniquePaths_usingDP(i-1,j,dp); //up
+          int left= uniquePaths_usingDP(i,j-1,dp); //left
+        
+        return dp[i][j]=up+left;
+     }
+
+}
+/* Approch:-
+we use Memoization and move form m-1,n-1 ---->0,0 and count path
+In uniquePaths_usingDP(int i,int j,int[][] dp)
+1)if we reach at 0,0 return 1
+2)if cross boundary return 0
+3)check in dp is there answer stored or not if stored return
+4)now check in up bay calling and left by calling
+5) whatever pathcount we get store in dp
