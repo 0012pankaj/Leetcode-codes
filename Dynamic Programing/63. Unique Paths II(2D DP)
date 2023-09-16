@@ -1,0 +1,30 @@
+class Solution {                     // using MEMOIZATION IN 2D DP tc-->O(n*m) sp-->O(m*n)
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+           //create Dp
+           int m=obstacleGrid.length;
+            int n=obstacleGrid[0].length;
+        int[][] dp=new int[m][n];
+        
+        //fill with -1;
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+
+      return  uniquePaths_usingDP(obstacleGrid,m-1,n-1,dp);
+    }
+
+     public static int uniquePaths_usingDP(int[][] grid, int i,int j,int[][] dp){
+                                                     //base Case
+         if(i==0 && j==0 && grid[i][j]!=1) return 1;                                    //only change  [  && grid[i][j]!=1  ]
+         if(i<0 || j<0 || grid[i][j]== 1) return 0;                                          //only change [ || grid[i][j]==  1  ]
+         
+         if(dp[i][j]!= -1) return dp[i][j];
+   
+          int up= uniquePaths_usingDP(grid,i-1,j,dp); //up
+          int left= uniquePaths_usingDP(grid,i,j-1,dp); //left
+        
+        return dp[i][j]=up+left;
+     }
+
+}
+//only change in base case same as  unique path
