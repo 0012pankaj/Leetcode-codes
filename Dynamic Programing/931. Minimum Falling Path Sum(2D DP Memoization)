@@ -1,0 +1,31 @@
+class Solution {  //Memoization 2D Dp flow top to down in this que Time Complexity: O(N*N)
+    public int minFallingPathSum(int[][] matrix) {
+     
+     int n=matrix.length;
+     int dp[][]=new int[n][n];
+     for(int ro[] : dp){
+         Arrays.fill(ro,-101);
+     }
+
+     //find min path from each col of first row to any of the last
+     int ans=Integer.MAX_VALUE;
+     for(int j=0;j<n;j++){
+          ans=Math.min(ans,minFallingPathSum_sol(matrix,0,j,dp,n));
+     }
+  
+    return ans;
+        
+    }
+    public static int minFallingPathSum_sol(int[][] matrix,int i,int j,int[][] dp,int n){
+        //base case
+        if(j<0 || j>=n) return (int) Math.pow(10, 7);
+        if(i==n-1) return matrix[i][j];   
+          
+          if(dp[i][j] != -101) return dp[i][j];
+        int ld=matrix[i][j]+minFallingPathSum_sol(matrix,i+1,j-1,dp,n);
+        int rd=matrix[i][j]+minFallingPathSum_sol(matrix,i+1,j,dp,n);
+       int down=matrix[i][j]+ minFallingPathSum_sol(matrix,i+1,j+1,dp,n);
+
+       return dp[i][j]= Math.min(Math.min(ld,rd),down);
+    }
+}
