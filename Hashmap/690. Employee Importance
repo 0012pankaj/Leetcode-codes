@@ -1,0 +1,30 @@
+class Solution {
+    public int getImportance(List<Employee> employees, int id) {
+
+        Queue<Integer> q=new LinkedList<>();
+        HashMap<Integer,Employee> hm=new HashMap<>();
+
+        for(Employee e: employees){
+            if(e.id == id){
+                q.add(e.id);
+            }
+            hm.put(e.id,e);
+        }
+
+        //bfs
+        int res=0;
+        while(!q.isEmpty()){
+             int eid=q.poll();
+             Employee ee=hm.get(eid);
+             res+=ee.importance;
+
+             for(int s : ee.subordinates){
+                 q.add(s);
+             }
+
+        }
+
+        return res;
+        
+    }
+}
