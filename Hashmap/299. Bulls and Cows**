@@ -1,0 +1,28 @@
+class Solution {
+    public String getHint(String s, String g) {
+        int ar1[]=new int[10];
+        int ar2[]=new int[10];
+        
+        int c_A=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==g.charAt(i)){
+                 c_A++;
+            }else{
+                ar1[s.charAt(i)-'0']++;
+                 ar2[g.charAt(i)-'0']++;
+            }
+        }
+
+        
+        int c_B=0;
+          for(int i=0;i<10;i++){
+           c_B+=Math.min(ar1[i],ar2[i]);
+        }
+
+        return c_A+"A"+c_B+"B";
+    }
+}
+
+/*Algo:
+1.bulls:count digit exact same in both [digit] and [position]
+2.cows:count digits match in both  strings but location is change
