@@ -1,0 +1,37 @@
+class Solution {
+    public int findMaxLength(int[] nums) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        int sum=0;
+        int large_subarry=0;
+        for(int i=0;i<nums.length;i++){
+            
+            if(nums[i]==0){
+                sum+=-1;
+            }else{
+                sum+=1;
+            }
+
+
+          if(sum==0)
+          large_subarry=Math.max(large_subarry,i+1);
+
+
+          if(!hm.containsKey(sum)){
+              hm.put(sum,i);
+          }else{
+                 large_subarry=Math.max(large_subarry,i-hm.get(sum));
+           
+          }
+               
+          
+        }
+       
+        return    large_subarry;
+    }
+}
+/* aproch:-
+Maintain a prefix sum with 0 being used as -1 and 1 being used as 1, so equal number of 1s and 0s would result to a sum of 0.
+
+Complexity
+Time complexity: O(n)
+Space complexity: O(n) */
