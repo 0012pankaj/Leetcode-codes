@@ -1,0 +1,25 @@
+class Solution { // tc-->o(n2)
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+
+        for(int i : nums1){
+            for(int j:nums2){
+                hm.put(i+j,hm.getOrDefault(i+j,0)+1);
+            }
+        }
+        int count=0;
+        for(int k : nums3){
+            for(int l:nums4){
+                    count+= hm.getOrDefault(-(k+l),0);
+                }
+            }
+        
+
+        return count;
+        
+    }
+}
+
+/* Algo:-
+if a+b+c+d=0 then a+b=-(c+d) so first we store a+b in map and after 
+that check -(c+d) if present then increase count */
