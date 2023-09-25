@@ -1,0 +1,27 @@
+class Solution {// tc-->O(n2)
+    public int leastBricks(List<List<Integer>> wall) {
+        HashMap<Integer,Integer> hm=new HashMap<>();
+         
+         int max_sum=0;
+        for(List<Integer> raw : wall){
+            int s=0;
+            for(int i=0;i<raw.size()-1;i++){
+                s+=raw.get(i);
+                hm.put(s,hm.getOrDefault(s,0)+1);
+
+               max_sum=Math.max(max_sum,hm.get(s));
+            }
+        }
+
+        //count maximum no. of time whic some come
+        int ans=wall.size()-max_sum;
+
+        return ans;
+         
+    }
+}
+/* algo:-
+neglect side /bountries
+we sum up at each row level and if sum is present in map we increase 
+count if sum else initialize the sum with new number our answer is number 
+of raws -maximum sum count at same level*/
