@@ -1,0 +1,48 @@
+class Solution {
+    public String reorganizeString(String s) {
+        int[] freq = new int[26];
+        int n=s.length();
+
+       for(int i=0;i<n;i++){
+   
+            ++freq[s.charAt(i)-'a'];
+        }
+         
+
+          PriorityQueue<Integer> maxHeap = new PriorityQueue<> ((barcode1, barcode2) -> freq[barcode2] - freq[barcode1]);
+      
+      
+
+        for (int ch = 0; ch < 26; ch++) {
+            if (freq[ch] != 0) {
+                maxHeap.offer (ch); //store bc in heap
+            }
+        }
+
+         int index = 0;
+        char ans[]=new char[n];
+        while (!maxHeap.isEmpty ()) {
+            int cc = maxHeap.poll ();
+            int fq = freq[cc];// frequency of bc
+            
+            while (fq-- != 0) {
+                ans[index] = (char)(97+cc);
+                index += 2;
+                
+                if (index >= n) {
+                    index = 1;
+                }
+            }
+        }
+
+        for(int i=0;i<ans.length-1;i++){
+            if(ans[i]==ans[i+1]){
+                return "";
+            }
+        }
+        
+        return new String(ans);
+        
+
+    }
+}
