@@ -1,0 +1,43 @@
+class Solution {
+    public int[] rearrangeBarcodes(int[] barcodes) {
+          
+        int[] freq = new int[10001];
+        
+        //frequency
+        for (int bc : barcodes) {
+            ++freq[bc];
+        }
+         
+        //  maxheap
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<> ((barcode1, barcode2) -> freq[barcode2] - freq[barcode1]);
+        
+        for (int bc = 1; bc <= 10000; bc++) {
+            if (freq[bc] != 0) {
+                maxHeap.offer (bc); //store bc in heap
+            }
+        }
+        
+        int index = 0;
+        
+        while (!maxHeap.isEmpty ()) {
+            int bc = maxHeap.poll ();
+            int fq = freq[bc];// frequency of bc
+            
+            while (fq-- != 0) {
+                barcodes[index] = bc;
+                index += 2;
+                
+                if (index >= barcodes.length) {
+                    index = 1;
+                }
+            }
+        }
+        
+        return barcodes;
+    }
+}
+
+/*Approch:-
+we first find frequency of each bc-barecode
+store frequency of each barecode--bc in maxheap
+run a loop on heap and pop max  element and arange at the gap of 2 upt its freq not reach 0 using loop*/
