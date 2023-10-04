@@ -1,0 +1,23 @@
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        int dp[]=new int[cost.length];
+        Arrays.fill(dp,-1);
+        int f=minCostClimbingStairs_1(cost,0,dp);
+         int s=minCostClimbingStairs_1(cost,1,dp);
+
+         return Math.min(f,s);
+    }
+
+    public static int minCostClimbingStairs_1(int []arr,int i,int[] dp){
+        if(i>=arr.length){
+            return 0;
+        }
+       
+       if(dp[i]!=-1) return dp[i];
+
+        int first=minCostClimbingStairs_1(arr, i+1,dp);
+        int second=minCostClimbingStairs_1(arr, i+2,dp);
+
+        return dp[i]= Math.min(first,second)+arr[i];
+    }
+}
