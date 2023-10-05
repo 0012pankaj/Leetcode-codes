@@ -1,0 +1,57 @@
+class Solution {   //tc-->O(n) sp-->O(1)
+    public List<Integer> majorityElement(int[] nums) { //Moore voting algo
+        //there are 2 element max possible greater than n/3
+        int n=nums.length;
+        int first=0;
+        int second=0;
+        int firstcount=0;
+        int secondcount=0;
+
+        for(int x:nums){
+            if( first == x ){
+                firstcount++;
+            }else if(second == x){
+                 secondcount++;
+            }else if(firstcount == 0 ){
+                first=x;
+                firstcount++;
+
+            }else if( secondcount == 0){
+                second=x;
+                secondcount++;
+            }else{
+                firstcount--;
+                secondcount--;
+            }
+        }
+         
+        //   System.out.println( first + " -> " + firstcount);
+        //    System.out.println( second + " -> " + secondcount);
+          firstcount=0;
+          secondcount=0;
+          //count there actual frequency and check
+
+          for(int x:nums){
+              if(x == first){
+                  firstcount++;
+              }
+              else if(x == second){
+                  secondcount++;
+              }
+          }
+          //check and add in list
+         
+        List<Integer> list=new ArrayList<Integer>();
+        if(nums == null || nums.length== 0) return list;
+        
+         if(firstcount > n/3){
+             list.add(first);
+         }
+         if(secondcount > n/3){
+             list.add(second);
+         }
+
+         return list;
+        
+    }
+}
