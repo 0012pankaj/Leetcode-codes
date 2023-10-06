@@ -1,0 +1,24 @@
+class Solution { // first find tree logic aplly recursion than fide it use Dp
+    public int integerBreak(int n) {
+        int dp[]= new int[58+1]; //2 <= n <= 58
+        Arrays.fill(dp,-1);
+       return solve(n,dp);
+        
+    }
+
+    public static int solve(int n,int[] dp){
+        if(n==1) return 1;
+        
+        if(dp[n]!=-1) return dp[n];
+     
+          
+         int result=Integer.MIN_VALUE; 
+        for(int i=1; i<=n-1 ;i++){
+              int product=i*Math.max(n-i,solve(n-i,dp));
+
+              result=Math.max(result,product);
+        }
+
+        return dp[n]=result;
+    }
+}
