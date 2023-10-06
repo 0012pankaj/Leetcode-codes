@@ -1,0 +1,26 @@
+class Solution { // 2d DP include not include recursion pattern
+
+    public int change(int amount, int[] coins) {
+        int dp[][]=new int[amount+1][coins.length+1];
+        for(int[] row: dp){
+            Arrays.fill(row,-1);
+        }
+        return coinChange(coins,amount,0,dp);
+    }
+
+    //Top-Down Approch
+    public static int coinChange(int[] coin,int amnt,int i,int[][] dp){
+        if(amnt == 0) return 1;
+
+        if(i==coin.length) return 0;
+        if(dp[amnt][i]!=-1) return dp[amnt][i];
+
+        int inc=0,exc=0;
+        if(amnt >= coin[i]){
+            inc=coinChange(coin,amnt-coin[i],i,dp);//dp[amnt-coint[i]][i] //include coin 
+        }
+        exc=coinChange(coin,amnt,i+1,dp); //not include dp[amnt]][i+1]
+
+        return dp[amnt][i]=inc+exc;
+    }
+}
