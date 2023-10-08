@@ -1,0 +1,44 @@
+class Solution { //using DP tabulataion same as House Robber 1 
+   /* in this que we 2 sol 1) except last element/house ,
+   2) except first house/element*/
+
+    public int rob(int[] nums) {
+        if(nums.length==1) return nums[0];
+
+        int n=nums.length;
+        int ar1[]=new int[n-1];
+        for(int i=0;i<n-1;i++){ ar1[i]=nums[i]; }//remove last
+
+         int ar2[]=new int[n-1];
+        for(int i=0;i<n-1;i++){ ar2[i]=nums[i+1];  }//remove first
+
+        int ans=Math.max(findans(ar1),findans(ar2));
+
+        return ans;
+        
+    }
+
+
+     public int findans(int[] nums) {
+        int n=nums.length;
+        int dp[]=new int[n];//only use to store value 
+
+        dp[0]=nums[0];      //here indxing is little diff but correct 
+       
+        for(int i=1;i<n;i++){
+         
+         //for picking curr value and next to its previous from dp-store
+         int pickit=nums[i];
+         if(i>1) pickit += dp[i-2]; //not adjecent
+          
+          //for not picking curr value and next to its previous
+          //pic only previous from dp-store
+          int picprev=dp[i-1];
+
+          //store currvlaue at dp acc to statment
+          dp[i]=Math.max(pickit,picprev);
+
+        }
+        return dp[n-1];     //solution is always store at last index of 1d dp
+    }
+}
