@@ -1,0 +1,96 @@
+You are given a 0-indexed 2D integer array flowers,
+where flowers[i] = [starti, endi] means the ith flower will be in full bloom from
+starti to endi (inclusive). You are also given a 0-indexed
+integer array people of size n, where people[i] is the time that the ith 
+person will arrive to see the flowers.
+
+Return an integer array answer of size n, where answer[i] is the number
+of flowers that are in full bloom when the ith person arrives.
+
+ Input: flowers = [[1,6],[3,7],[9,12],[4,13]], poeple = [2,3,7,11]
+Output: [1,2,2,2]
+Explanation: The figure above shows the times when the
+flowers are in full bloom and when the people arrive.
+For each person, we return the number of flowers in full bloom during their arrival.
+
+Input: flowers = [[1,10],[3,3]], poeple = [3,3,2]
+Output: [2,2,1]
+Explanation: The figure above shows the times when the flowers are in full bloom and when the people arrive.
+For each person, we return the number of flowers in full bloom during their arrival.
+ 
+
+Constraints:
+
+1 <= flowers.length <= 5 * 104
+flowers[i].length == 2
+1 <= starti <= endi <= 109
+1 <= people.length <= 5 * 104
+1 <= people[i] <= 109
+__________________________________________________________________________________________________
+
+class Solution { //optimal tle in brutforce approch
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+        int m = flowers.length;
+        int n = people.length;
+
+        int[] result = new int[n];
+
+        int[] start_time = new int[m];
+        int[] end_time = new int[m];
+
+        for (int i = 0; i < m; i++) {
+            start_time[i] = flowers[i][0];
+            end_time[i] = flowers[i][1];
+        }
+
+        Arrays.sort(start_time);
+        Arrays.sort(end_time);
+
+        for (int i = 0; i < n; i++) {
+            int bloomed_already = binarySearchUpperBound(start_time, people[i]);
+            int died_already = binarySearchLowerBound(end_time, people[i]);
+            result[i] = bloomed_already - died_already;
+        }
+
+        return result;
+    }
+
+    private int binarySearchUpperBound(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length-1;
+        int result = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if(arr[mid] > target) {
+                result = mid;
+                right = mid-1;
+            } else {
+                left = mid+1;
+            }
+        }
+
+        return result == -1 ? arr.length : result;
+    }
+
+    private int binarySearchLowerBound(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length-1;
+        int result = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+             
+             if(arr[mid] >= target) {  //diff-->=
+                result = mid;
+                right = mid-1;
+            } else {
+                left = mid+1;
+            }
+            
+        }
+  
+        return result == -1 ? arr.length : result;
+    }
+}
