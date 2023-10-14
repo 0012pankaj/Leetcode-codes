@@ -1,0 +1,27 @@
+class Solution {
+   static  int n;
+    public int paintWalls(int[] cost, int[] time) {
+         n=cost.length;
+         int dp[][]=new int[n+1][n+1];
+         for(int[] r:dp){
+             Arrays.fill(r,-1);
+         }
+
+      return   solve(0,n,cost,time,dp);
+    }
+
+    public static int solve(int idx,int remain,int[] cost,int[] time,int[][] dp){
+        if(remain <=0) return 0;
+
+        if(idx >=n) return  1000_000_000;
+
+        if(dp[idx][remain]!=-1){
+            return dp[idx][remain];
+        }
+
+        int idx_paint=cost[idx]+solve(idx+1,remain-1-time[idx],cost,time,dp);
+        int idx_Npaint=solve(idx+1,remain,cost,time,dp);
+
+        return  dp[idx][remain]=Math.min(idx_paint,idx_Npaint);
+    }
+}
