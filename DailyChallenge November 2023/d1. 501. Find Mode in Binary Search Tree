@@ -1,0 +1,73 @@
+Given the root of a binary search tree (BST) with duplicates, return all the mode(s) (i.e., the most frequently occurred element) in it.
+
+If the tree has more than one mode, return them in any order.
+
+Assume a BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than or equal to the node's key.
+The right subtree of a node contains only nodes with keys greater than or equal to the node's key.
+Both the left and right subtrees must also be binary search trees.
+ ----------------------------------------------------------------------------
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+ //idea : inorder give sorted oder of nodes value so we itrate over tree and get max freq elemets
+class Solution {   //optimal without extra space
+   public  int currnum=0;
+   public int currfreq=0;
+    public int maxfreq=0;
+    public ArrayList<Integer> l=new ArrayList<>();
+
+    public int[] findMode(TreeNode root) {
+      caldfs(root);
+
+      int ans[]=new int[l.size()];
+      for(int i=0;i<l.size();i++){
+          ans[i]=l.get(i);
+      }
+      
+     return ans;
+    }
+
+    public void caldfs(TreeNode node){
+        if(node==null){
+            return;
+        }
+
+        //inorder
+        caldfs(node.left);
+
+    
+        if(currnum == node.val ){
+            currfreq++;
+        }else{
+            currfreq=1;
+            currnum=node.val;
+        }
+
+        if(currfreq > maxfreq){
+            maxfreq=currfreq;
+            l.clear();
+        }
+
+        if(currfreq == maxfreq){
+            l.add(node.val);
+           }
+
+        caldfs(node.right);
+    }
+}
