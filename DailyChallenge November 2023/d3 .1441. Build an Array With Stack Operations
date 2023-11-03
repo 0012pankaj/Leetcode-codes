@@ -1,0 +1,24 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> ans=new ArrayList<>();
+       
+        HashSet<Integer> set=new HashSet<>();
+
+        int x=1;
+        for(int i=0;i<target.length;i++){
+            set.add(target[i]);
+        }
+
+        for(int i=1;i<=n;i++){
+            if(set.contains(i)){
+                ans.add("Push");
+                set.remove(i);
+            }else if(!set.contains(i) && !set.isEmpty()){
+                 ans.add("Push");
+                  ans.add("Pop");
+            }
+        }
+       
+       return ans;
+    }
+}
