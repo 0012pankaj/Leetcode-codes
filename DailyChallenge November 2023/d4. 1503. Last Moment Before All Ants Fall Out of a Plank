@@ -1,0 +1,15 @@
+class Solution {
+    public int getLastMoment(int n, int[] left, int[] right) {
+
+        
+        int maxres=0;
+        for(int l:left){
+            maxres=Math.max(maxres,l);
+        }
+         for(int r: right){
+            maxres=Math.max(maxres,n-r);
+        }
+        
+        return maxres;
+    }
+}
