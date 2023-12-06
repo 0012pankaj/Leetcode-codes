@@ -1,0 +1,67 @@
+Given an m x n binary matrix filled with 0's and 1's, find the largest
+square containing only 1's and return its area.
+
+Example 1:
+
+
+Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+Output: 4
+Example 2:
+
+
+Input: matrix = [["0","1"],["1","0"]]
+Output: 1
+Example 3:
+
+Input: matrix = [["0"]]
+Output: 0
+ 
+
+Constraints:
+
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 300
+matrix[i][j] is '0' or '1'.
+--------------------------------------------------------------------------------------
+
+class Solution {   //Dp Memoization
+    int maxans=0;
+    public int maximalSquare(char[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int dp[][]=new int[n][m];
+        for(int r[]: dp){
+            Arrays.fill(r,-1);
+        }
+
+
+        funcall(matrix,0,0,dp);
+
+        return maxans*maxans;
+    }
+
+    public int funcall(char[][] matrix, int i,int j ,int dp[][]){
+        if(i >= matrix.length || j >= matrix[0].length){
+            return 0;
+        }
+
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+
+        int right=funcall(matrix,i,j+1 ,dp);
+        int down=funcall(matrix,i+1,j ,dp);
+        int dignal=funcall(matrix,i+1,j+1 ,dp);
+
+        if(matrix[i][j] == '1'){
+          int ans=1+Math.min(right,Math.min(down,dignal));
+          maxans=Math.max(maxans,ans);
+          return dp[i][j]=ans;
+        }else{
+          return dp[i][j]=0;
+        }
+            
+
+        }
+    }  
