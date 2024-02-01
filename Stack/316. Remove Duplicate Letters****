@@ -1,0 +1,69 @@
+Given a string s, remove duplicate letters so that every letter appears once and only once. 
+You must make sure your result is 
+the smallest in lexicographical order
+ among all possible results.
+
+Example 1:
+
+Input: s = "bcabc"
+Output: "abc"
+Example 2:
+
+Input: s = "cbacdcbc"
+Output: "acdb"
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of lowercase English letters.
+ 
+
+Note: This question is the same as 1081:
+____________________________________________________________________________________________________________________
+class Solution {       //monotonic stack
+    public String removeDuplicateLetters(String s) {
+        int n=s.length();
+
+        int lastindex[]=new int[26];
+        boolean taken[]=new boolean[26];
+        Stack<Character> st=new Stack<>();
+
+       // last index array
+       Arrays.fill(lastindex,-1);
+       for(int i=0;i<n;i++){
+        lastindex[s.charAt(i)-'a']=i;
+       }
+
+       for(int i=0;i<n;i++){
+        char ch=s.charAt(i);
+
+        if(taken[ch-'a'])continue;
+
+        while(!st.isEmpty() && ch < st.peek() && lastindex[st.peek()-'a'] > i){
+            char c=st.pop();
+            taken[c-'a']=false;
+        }
+
+        st.push(ch);
+         taken[ch-'a']=true;
+
+       }
+
+       String ans="";
+       while(!st.isEmpty()){
+           ans=st.pop()+ans;
+       }
+        
+        return ans;
+    }
+}
+/*Approch:-
+we take 2 array and 1 stack,
+ 1st array for storing last index of each character occur,and second array that visited/taken 
+ ->we take each character one by one 
+ 1.check if we already take same then skip move to next 
+ 2.if not taken then check in stack peek 
+   if char At peek of stack is greater than current character and its lastindex(present in future) is greater than current
+   then popit out and mark its taken false
+*/
