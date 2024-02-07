@@ -1,0 +1,41 @@
+Description
+Given a string S, find the length of the longest substring T that contains at most k distinct characters.
+
+Example
+Example 1:
+
+Input: S = "eceba" and k = 3
+Output: 4
+Explanation: T = "eceb"
+Example 2:
+
+Input: S = "WORLD" and k = 4
+Output: 4
+Explanation: T = "WORL" or "ORLD"
+Challenge
+O(n) time
+_________________________________________________________________
+public static int subarraysWithAtMostKDistinct(int[] nums,int k){
+        int n= nums.length;
+        int i=0;
+        int j=0;
+        HashMap<Integer,Integer> map=new HashMap<>();
+        int count=0;
+        while(j<n){
+          map.put(nums[j],map.getOrDefault(nums[j],0)+1);
+
+          while(map.size() > k){
+              map.put(nums[i],map.getOrDefault(nums[i],0)-1);
+              if(map.get(nums[i]) <=0){
+                  map.remove(nums[i]);
+              }
+              i++;
+          }
+
+          count+=(j-i+1);
+
+          j++;
+        }
+
+        return count++;
+}
