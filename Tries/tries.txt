@@ -1,0 +1,51 @@
+class Solution {
+    public int[] dailyTemperatures(int[] t) {
+        int n=t.length;
+        Stack<Integer> s=new Stack<>();
+        int Ans[]=new int[n];
+
+        //step 1:
+        s.push(n-1);
+        Ans[n-1]=0;
+
+        //step 2:
+
+        for(int i=n-2 ;i>=0;i--)
+        {    //step 2.1
+            if(t[s.peek()] > t[i]){
+                Ans[i]=s.peek()-i;
+                s.push(i);
+            }else{
+                //step 3:
+                //3.1
+               while( !s.isEmpty() && t[s.peek()] <= t[i] ){
+                   s.pop();
+               }
+                //3.2
+                if(s.isEmpty()){
+                    Ans[i]=0;
+                }else{
+                  Ans[i]=s.peek()-i;
+                }
+                
+                //3.3
+               s.push(i);
+            }
+        }
+
+  return Ans;
+        
+    }
+}
+/* Approch:
+ 1.use an Stack to store index , start from last of t array store last index in stack and 0 to Ans[] Array
+ 2. run loop from n-2 to 0
+   2.1 .check if (top element on stack is greatter then current) if YES, then (ans = index at top of stack - current index) and push index of current to stack.
+ 3 .if NO, then 
+     3.1,run a while loop upto which (we get greater element then curent && stack become empty) and pop() the small elements.
+     3.2,after while loop check if(stack is empty){
+         then Ans=0 
+     }
+     else ans=top index in stack -current index.
+     3.3 push current index in stack*/
+  
