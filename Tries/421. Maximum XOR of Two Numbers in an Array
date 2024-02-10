@@ -1,0 +1,105 @@
+Given an integer array nums, return the maximum result of nums[i] XOR nums[j], where 0 <= i <= j < n.
+Example 1:
+
+Input: nums = [3,10,5,25,2,8]
+Output: 28
+Explanation: The maximum result is 5 XOR 25 = 28.
+Example 2:
+
+Input: nums = [14,70,53,83,49,91,36,80,92,51,66,70]
+Output: 127
+ 
+__________________________________________________________________________________________________________
+class Solution {
+     public static class Node {  //1
+		Node zero;
+		Node one;
+	}
+    // start------->
+    public int findMaximumXOR(int[] arr) {
+        Node root = new Node();
+		for (int val : arr) {
+			Insert(root, val);
+		}
+		int ans = Integer.MIN_VALUE;
+		for (int val : arr) {
+			ans = Math.max(ans, getxor(root, val));
+		}
+
+        return ans;
+    }
+
+   
+	public static void Insert(Node root, int val) {  //2
+		Node curr = root;
+		for (int i = 31; i >= 0; i--) {  //for integer 32 bit start from 31
+			int bit = (val & (1 << i));
+			if (bit == 0) {
+				if (curr.zero != null) {
+					curr = curr.zero;
+				} else {
+					Node nn = new Node();
+					curr.zero = nn;
+					curr = nn;
+
+				}
+			} else {
+				if (curr.one != null) {
+					curr = curr.one;
+				} else {
+					Node nn = new Node();
+					curr.one = nn;
+					curr = nn;
+
+				}
+			}
+		}
+	}
+
+	
+	private static int getxor(Node root, int val) { //3
+		// TODO Auto-generated method stub
+		Node curr = root;
+		int xor = 0;
+		for (int i = 31; i >= 0; i--) {
+			int bit = (val & (1 << i));
+			if (bit == 0) {
+				if (curr.one != null) {
+					xor += (1 << i);
+					curr = curr.one;
+				} else {
+					curr = curr.zero;
+				}
+			} else {
+				if (curr.zero != null) {
+					xor += (1 << i);
+					curr = curr.zero;
+				} else {
+					curr = curr.one;
+				}
+			}
+		}
+		return xor;
+	}
+}
+_______________________________________________________________________________________________________
+
+Approch:-
+we cand also do using O(n2) approch 2 loop
+Best Approch:-
+USE : Trie conept and Bitmasking
+1.create Node with 2 child 0 and 1
+2.create Trie[ Insert(root, val);]using bitvalue from left 31st to 0th bit of each number.[ , (val & (1 << i));->use to fint bit at each ith positon]
+Node nn = new Node();
+curr.zero = nn;
+curr = nn;
+create nod andassign it and move to that node..........
+
+3. now to find maximum value we do XOR of each value with tries and get nam out of that
+4. point to note in XOR is:- 	if (bit == 0) {
+				if (curr.one != null) { bit is 0 of value, in trie we take One and ifbit is 1 of value, in trie we take One Zero
+				else {
+				if (curr.zero != null) {
+				to find XOR
+this help us to get maximum ass posible				
+		xor += (1 << i); to sum up requier bit value
