@@ -1,0 +1,38 @@
+You are given a 0-indexed integer matrix grid and an integer k.
+
+Return the number of submatrices that contain the top-left element of the grid, and have a sum less than or equal to k.
+
+ Input: grid = [[7,6,3],[6,6,1]], k = 18
+Output: 4
+Explanation: There are only 4 submatrices, shown in the image above, that contain the top-left element of grid, and have a sum less than or equal to 18.
+
+---------------------------------------------------------------------------------------------
+class Solution {
+  
+    public int countSubmatrices(int[][] grid, int k) {
+        int n=grid.length;
+        int m=grid[0].length;
+        int dp[][]=new int[n][m];
+        int count=0;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                
+                if(i==0 && j==0){
+                    dp[i][j]=grid[i][j];
+                }else if(i==0){
+                     dp[i][j]= dp[i][j-1]+grid[i][j];
+                }else if(j==0){
+                      dp[i][j]=dp[i-1][j]+grid[i][j];
+                }else{
+                      dp[i][j]=(dp[i][j-1]+dp[i-1][j]-dp[i-1][j-1])+grid[i][j];
+                }
+                
+                if(dp[i][j] <= k)count++;
+            }
+        }
+        
+        return count;
+          
+    }
+}
